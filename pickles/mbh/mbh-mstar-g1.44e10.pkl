@@ -1,0 +1,11 @@
+(dp0
+S'mstar'
+p1
+(lp2
+sS'mbh'
+p3
+(lp4
+sS'time'
+p5
+(lp6
+s.
