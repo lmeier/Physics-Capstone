@@ -60,14 +60,14 @@ mstar_nihao = []
 sfr_nihao = []
 time_nihao = []
 
-galDict = pickle.load(open(fileBase + '/2018/pickles/AGN_ELL_NIHAOproperties.pkl', 'rb'))
+galDict = pickle.load(open(fileBaseFalcon + '/2018/pickles/AGN_ELL_NIHAOproperties.pkl', 'rb'))
 galaxies = galDict.keys()
 galaxies.sort()
 
 timeMsDict = dict()
 timeSfrDict = dict()
 
-nihaoGalDict = pickle.load(open(fileBase + '/2018/pickles/AGN_ELL_NIHAOproperties.pkl', 'rb'))
+nihaoGalDict = pickle.load(open(fileBaseFalcon + '/2018/pickles/AGN_ELL_NIHAOproperties.pkl', 'rb'))
 
 for g in nihaoGalDict.keys():
     propDict = nihaoGalDict[g]
@@ -121,7 +121,7 @@ all_delta_after_log = []
 sfrEndAtTime = []
 sfrEndConc = []
 
-concDict = pickle.load(open(fileBase + '/2018/pickles/concentrationsDMO_AGN_ELL.pkl', 'rb'))
+concDict = pickle.load(open(fileBaseFalcon + '/2018/pickles/concentrationsDMO_AGN_ELL.pkl', 'rb'))
 concentrations = concDict.values()
 allConc = []
 allMstar = []
@@ -146,8 +146,8 @@ g3 = [g for g in nihaoGalDict.keys()[20:30]]
 g4 = [g for g in nihaoGalDict.keys() if g not in g1+g2+g3]
 
 
-#gal_all = ['g1.95e10', 'g4.86e10', 'g6.77e10', 'g9.59e10', 'g1.05e11', 'g1.37e11', 'g1.52e11', 
-# 'g2.04e11', 'g3.06e11', 'g3.21e11', 'g4.90e11', 'g5.38e11', 'g5.55e11', 'g6.96e11',  'g7.55e11', 
+#gal_all = ['g1.95e10', 'g4.86e10', 'g6.77e10', 'g9.59e10', 'g1.05e11', 'g1.37e11', 'g1.52e11',
+# 'g2.04e11', 'g3.06e11', 'g3.21e11', 'g4.90e11', 'g5.38e11', 'g5.55e11', 'g6.96e11',  'g7.55e11',
 # 'g8.26e11', 'g8.28e11', 'g1.05e11', 'g1.12e12', 'g2.79e12']
 gal_arr = [g1, g2, g3, g4]
 #gal_arr =[gal_all]
@@ -249,7 +249,7 @@ for i, name, p in zip(gal_arr, size_names, plot):
     plt.xlabel("Time [Gyr]", fontsize=18)
     plt.title( " NIHAO Galaxies")
     plt.legend(prop={'size': 8}, loc='best')
-    plt.savefig(str(fileBase + "/capstone/plotsSat/ELL_deltasfr" + name + ".png"), dpi=300)
+    #plt.savefig(str(fileBase + "/capstone/plotsSat/ELL_deltasfr" + name + ".png"), dpi=300)
     plt.show()
 
 all_delta_percentages = list(all_delta_after_log)
@@ -288,7 +288,7 @@ plt.xlabel("Delta Log(SFR) [M$_\odot$/ Year]", fontsize=18)
 plt.title('Ellipticals')
 plt.yscale('log')
 #plt.xscale('symlog')
-plt.savefig(str(fileBase + "/capstone/plotsSat/ELL_hist.png"), dpi=300)
+#plt.savefig(str(fileBase + "/capstone/plotsSat/ELL_hist.png"), dpi=300)
 plt.show()
 
 for i in avg_fit_dict:
