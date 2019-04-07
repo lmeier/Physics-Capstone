@@ -4,6 +4,7 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import glob, os, pynbody, matplotlib
 import pickle
+import math
 import matplotlib.patches as mpatches
 import matplotlib.lines as mlines
 import copy
@@ -32,17 +33,16 @@ def monotonic_x(old_x, old_y):
             highest_a = a
     return new_x, new_y
 
-galaxies = ['g2.79e12']
+galaxies = ['g2.79e12', 'g1.37e11', 'g5.38e11']
 
 for g in galaxies:
-    try:
-        propDict = galDict[g]
-    except:
-        continue
-    agnpropDict = agngalDict[g]
+    propDict = galDict[g]
     ms = propDict['ms']
-    agnms = agnpropDict['ms']
 
+    if g == 'g2.79e12':
+        agnpropDict = agngalDict[g]
+        agnms = agnpropDict['ms']
+        agnsfr = agnpropDict['sfr']
     #coldgas = propDict['coldgas']
     redshift = propDict['z']
     timeNew = propDict['time']
@@ -52,6 +52,7 @@ for g in galaxies:
     SFR0 =  [29.3, 23.77, 6.80, 1.29]
     slope = [.9, .9, .9, 0.77]
     colors = ['y', 'g', 'b', 'k']
+    num = 0
     fig = plt.figure(figsize=(10,10))
 
     expForZeroSFR = -3.4
@@ -60,6 +61,11 @@ for g in galaxies:
     y = []
     print()
     for j in range(0, len(sfr)):
+        if redshift[j] > 4:
+            continue
+        #check if it's within 0.05 of a whole number, label these points
+            print('scatter')
+        print(redshift[j])
         x.append(ms[j])
         if sfr < 10**-3.4: #previously -2.5
             y.append(10**expForZeroSFR)
@@ -70,21 +76,22 @@ for g in galaxies:
     x2 = []
     y2 = []
     print()
-    for j in range(0, len(agnsfr)):
-        x2.append(agnms[j])
-        if sfr < 10**-3.4: #previously -2.5
-            y2.append(10**expForZeroSFR)
-        else:
-            y2.append(agnsfr[j])
-        grey = 1 - 0.9 #*random.random()
 
+    if g == 'g2.79e12':
+        for j in range(0, len(agnsfr)):
+            x2.append(agnms[j])
+            if sfr < 10**-3.4: #previously -2.5
+                y2.append(10**expForZeroSFR)
+            else:
+                y2.append(agnsfr[j])
+
+        a2, = plt.plot(x2,y2, 'o-', color='black', label='With AGN')
 
 
     #plt.plot(monotonic_x(x,y), 'o-', color=str(grey))
     #x, y =  monotonic_x(x,y)
     a1, = plt.plot(x,y, 'o-', color='red', label='Without AGN')
     #x2, y2 = monotonic_x(x2,y2)
-    a2, = plt.plot(x2,y2, 'o-', color='black', label='With AGN')
     #draw high density rectangle for red sequence
     x = [10**10.6, 10**10.7, 10**10.4, 10**10.3, 10**10.6]
     y = [10**-1.025, 10**-1.125, 10**-1.45, 10**-1.35, 10**-1.025]
@@ -105,6 +112,16 @@ for g in galaxies:
     y_2_patch = mpatches.Patch(color='g', label='z = 2', alpha=0.4)
     y_1_patch = mpatches.Patch(color='b', label='z = 1', alpha=0.4)
     y_0_patch = mpatches.Patch(color='k', label='z = 0', alpha=0.4)
+
+
+    for i in range(0, len(sfr)):
+        if abs(redshift[i] - int(redshift[i])) < 0.05 and redshift[j] > 0.9:
+            plt.plot(ms[i], sfr[i], linewidths=5,  marker='kx',  color=colors[num])
+            num +=1
+            print('scatter')
+
+
+
     #agn_legend = mlines.Line2D([], [], color='k', marker='X',
     #markersize=15, label='AGN gals')
     plt.legend(handles=[a1, a2, y_3_patch, y_2_patch, y_1_patch, y_0_patch,], loc=2)
@@ -116,10 +133,10 @@ for g in galaxies:
     plt.xscale('log')
     plt.yscale('log')
     #Renzini plus one in all directions
-    plt.xlim(10**7, 10**(12.5))
-    plt.ylim(10**-3.5, 10**2.0)
+    plt.xlim(10**8, 10**12.5)
+    plt.ylim(10**-2.5, 10**1.8)
     plt.title(g, fontsize=18)
-    plt.savefig('plots/'+ g + 'tracks.png', dpi=300)
+    plt.savefig('plots/3_'+ g + 'tracks.png', dpi=300)
     plt.show()
     plt.close()
 
