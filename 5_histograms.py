@@ -92,6 +92,7 @@ def plot_hist(deltas, concs, minConc = 8, maxConc =11, binCount=23, plotTitle='N
     res_lst = np.array(res_lst)
     cmap = plt.get_cmap('plasma')
     sm = plt.cm.ScalarMappable(cmap='plasma', norm=plt.Normalize(minConc, maxConc))
+    #sm = plt.cm.ScalarMappable(cmap='plasma', norm=plt.Normalize(min(res_lst), max(res_lst)))
     sm._A = []
 
     for i in range(len(patches)):
@@ -103,7 +104,7 @@ def plot_hist(deltas, concs, minConc = 8, maxConc =11, binCount=23, plotTitle='N
     plt.xlim(-3, 3)
     plt.yscale('log')
     plt.title(plotTitle)
-    #plt.savefig(str("del_sfr_ELL_plots/NIHAO_hist.png"), dpi=300)
+    plt.savefig(str("plots/5_hist_" + plotTitle.replace(" ", "") + ".png"), dpi=300)
     plt.show()
 
 def make_delta_conc_lists(gals, galDict, concDict, avgFitDict):
@@ -113,18 +114,25 @@ def make_delta_conc_lists(gals, galDict, concDict, avgFitDict):
     sfrEndConc = []
     allConc = []
     allMstar = []
+    minMaxSetYet = False
     for num, g in enumerate(gals):
+        if g not in concDict.keys():
+            galsNotIncluded.append(g)
+            continue
         propDict = galDict[g]
         conc0 = concDict[g]
-        if num == 0:
+        if minMaxSetYet == False:
             cur_min = conc0
             cur_max = conc0
+            minMaxSetYet = True
         else:
             if conc0 < cur_min:
                 cur_min = conc0
             if conc0 > cur_max:
                 cur_max = conc0
     for g in gals:
+        if g not in concDict.keys():
+            continue
         propDict = galDict[g]
         conc0 = concDict[g]
         #concentration0 = "n/a"
@@ -190,20 +198,73 @@ def make_delta_conc_lists(gals, galDict, concDict, avgFitDict):
 names =["Total_NIHAO_Classic", "NIHAO_Classic_High_Mass",
 "NIHAO_Classic_Low_Mass", "NIHAO_Ellipticals_All", "NIHAO_With_AGN", "NIHAO_Without_AGN"]
 
-alDictEllBH = pickle.load(open("pickles/AGN_ELL_NIHAOproperties.pkl", "rb"))
+galDictEllBH = pickle.load(open("pickles/AGN_ELL_NIHAOproperties.pkl", "rb"))
 galDictEll = pickle.load(open("pickles/ELL_WOBH_NIHAOproperties.pkl", "rb"))
 #NIHAO non ellipical
 galDict = pickle.load(open("pickles/ALLjanNEW_NIHAOproperties.pkl", "rb"))
 galDictBH = pickle.load(open("pickles/NIHAO_BHproperties.pkl", "rb"))
 
+#DMO2 because thats the right conc's
+concDictNIHAO = pickle.load(open('/home/lem507/2018/pickles/concentrationsDMO2.pkl', 'rb'))
+concDictEll = pickle.load(open('/home/lem507/2018/pickles/concentrationsDMO_AGN_ELL2.pkl', 'rb'))
+allConc = concDictNIHAO.copy()
+allConc.update(concDictEll)
+print(allConc.keys())
+galsNotIncluded = []
 
 current_galDict = pickle.load(open('/home/lem507/2018/pickles/ALLjanNEW_NIHAOproperties.pkl', 'rb'))
-current_concDict = pickle.load(open('/home/lem507/2018/pickles/concentrations.pkl', 'rb'))
-concentrations = current_concDict.values()
+concentrations = allConc.values()
 current_gals = [g for g in current_galDict.keys()]
 
+highMassGals = []
+lowMassGals = []
+for g in galDict.keys():
+    if int(g[-2:]) > 11 or (int(g[-2:]) == 11 and int(g[1]) >= 5):
+       highMassGals.append(g)
+    else:
+        lowMassGals.append(g)
+#NIHAO Classic
+avgFitDict = make_fits(galDict)
+delta_list, conc_list = make_delta_conc_lists(galDict.keys(), galDict, allConc, avgFitDict)
+plot_hist(delta_list, conc_list, minConc=5, maxConc=11.5,  plotTitle='NIHAO Classic')
 
-current_avgFitDict = make_fits(current_galDict)
-delta_list, conc_list = make_delta_conc_lists(current_gals, current_galDict, current_concDict, current_avgFitDict)
-plot_hist(delta_list, conc_list)
+#NIHAO Classis High Mass
+avgFitDict = make_fits(galDict)
+delta_list, conc_list = make_delta_conc_lists(highMassGals, galDict, allConc, avgFitDict)
+plot_hist(delta_list, conc_list, minConc=6, maxConc=9.6, plotTitle = 'NIHAO Classic High Mass')
+
+#NIHAO Classis Low Mass
+avgFitDict = make_fits(galDict)
+delta_list, conc_list = make_delta_conc_lists(lowMassGals, galDict, allConc, avgFitDict)
+plot_hist(delta_list, conc_list, minConc=6, maxConc=15, plotTitle='NIHAO Classic Low Mass')
+
+#NIHAO with Ellipticals
+nihaoWithEll = galDict.copy()
+nihaoWithEll.update(galDictEllBH)
+avgFitDict = make_fits(nihaoWithEll)
+delta_list, conc_list = make_delta_conc_lists(nihaoWithEll.keys(), nihaoWithEll, allConc, avgFitDict)
+plot_hist(delta_list, conc_list, minConc = 6, maxConc = 12, plotTitle="NIHAO with Ellipticals")
+
+#With AGN
+withAgn = galDictBH.copy()
+withAgn.update(galDictEllBH)
+avgFitDict = make_fits(withAgn)
+delta_list, conc_list = make_delta_conc_lists(withAgn.keys(), withAgn, allConc, avgFitDict)
+plot_hist(delta_list, conc_list, minConc=5, maxConc=9.6,  plotTitle="Galaxies with AGN")
+
+#Without AGN
+withoutAgn = galDict.copy()
+withAgn.update(galDictEll)
+avgFitDict = make_fits(withoutAgn)
+delta_list, conc_list = make_delta_conc_lists(withoutAgn.keys(), withoutAgn, allConc, avgFitDict)
+plot_hist(delta_list, conc_list, minConc = 5, maxConc = 15, plotTitle="Galaxies without AGN")
+
+print(galsNotIncluded)
+
+
+
+
+
+
+
 #def plot_hist(deltas=all_delta_after_log, concs=allConc, minConc = 8, maxConc =11, binCount=23, plotTitle='NIHAO'):
