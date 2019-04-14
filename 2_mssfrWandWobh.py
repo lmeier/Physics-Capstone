@@ -36,6 +36,8 @@ for g in galDictBH.keys():
     msBH = propDictBH['ms'][-1]
     sfrBH = propDictBH['sfr'][-1]
     zBH = propDictBH['z'][-1]
+    if zBH > 0.03:
+       continue
     print(g)
     print(z)
     print(zBH)
@@ -79,20 +81,17 @@ popt, pcov = curve_fit(func, mstarAll, sfrAll)
 SFR0 = popt[0]
 slope = popt[1]
 '''
-
-
-
-#draw high density rectangle for red sequence
-x = [10**10.6, 10**10.7, 10**10.4, 10**10.3, 10**10.6]
-y = [10**-1.025, 10**-1.125, 10**-1.45, 10**-1.35, 10**-1.025]
-plt.plot(x,y, '-', color='r', linewidth=2)
+x = [10**10.62, 10**10.88, 10**10.375, 10**10.1, 10**10.62]
+y = [10**-0.83, 10**-1.13, 10**-1.6, 10**-1.3, 10**-0.83]
+plt.plot(x,y, '-', color='r', linewidth=2, alpha =0.5)
 #draw high density triangle for blue cloud
-x = [ 10**10.15, 10**10.4, 10**8.7, 10**8.6, 10**8.1, 10**10.15] #3rd to last 10**8.25
-y = [ 10**0.3, 10**0.1, 10**-1.5, 10**-1.4, 10**-.95, 10**0.3] # 10**-1.25
-plt.plot(x,y, '-', color='r', linewidth=2)
+x = [ 10**10.05, 10**10.4, 10**8.7, 10**8.6, 10**8.1, 10**10.05] #3rd to last 10**8.25
+y = [ 10**0.5, 10**0.1, 10**-1.5, 10**-1.4, 10**-.95, 10**0.5] # 10**-1.25
+plt.plot(x,y, '-', color='r', linewidth=2, alpha = 0.5)
 #these are redshift 0.02 - 0.085
 
-#plt.scatter(mStarArray, sfrArray, color='b', alpha=0.5)
+
+
 
 '''
 plt.scatter(mstar, sfr, color='r', alpha=0.5, label="NIHAO")

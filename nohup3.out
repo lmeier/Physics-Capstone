@@ -1,0 +1,45 @@
+nohup: ignoring input
+['g2.11e13', 'g2.37e12', 'g2.16e12', 'g7.50e12', 'g3.59e12', 'g1.86e12', 'g3.42e12', 'g3.89e13', 'g1.33e13', 'g1.17e13', 'g1.29e13', 'g1.29e12', 'g1.80e12', 'g1.54e13', 'g2.88e12', 'g8.94e12', 'g4.84e12', 'g1.05e13', 'g2.20e13', 'g8.08e12', 'g4.81e12', 'g3.29e12', 'g1.57e12', 'g1.57e13', 'g1.62e12', 'g1.06e12', 'g2.58e13', 'g2.37e13', 'g1.26e12', 'g4.35e12', 'g1.87e13', 'g5.75e12', 'g3.78e13', 'g2.02e13', 'g2.28e12', 'g3.21e13', 'g2.71e12', 'g7.34e12', 'g4.41e12', 'g1.95e13', 'g2.56e12', 'g1.27e12', 'g5.41e12', 'g3.37e13', 'g7.92e12', 'g6.70e12', 'g1.38e12', 'g1.25e13', 'g9.61e12', 'g7.71e12', 'g6.86e12', 'g3.26e13', 'g7.55e12', 'g1.14e13', 'g1.63e13', 'g2.04e12', 'g3.05e12', 'g1.55e12', 'g1.96e12', 'g5.53e12', 'g3.74e12', 'g4.55e12', 'g2.10e13', 'g2.07e13', 'g6.53e12', 'g6.57e12', 'g8.45e12', 'g1.79e13', 'g5.22e12']
+['/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00016', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00032', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00048', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00064', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00080', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00096', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00112', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00128', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00144', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00160', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00176', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00192', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00208', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00224', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00240', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00256', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00272', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00288', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00304', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00320', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00336', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00352', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00368', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00384', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00400', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00416', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00432', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00448', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00464', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00480', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00496', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00512', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00528', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00544', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00560', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00576', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00592', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00608', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00624', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00640', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00656', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00672', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00688', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00704', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00720', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00736', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00752', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00768', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00784', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00800', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00816', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00832', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00848', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00864', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00880', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00896', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00912', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00928', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00944', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00960', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00976', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.00992', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.01008', '/scratch/mb6605/NIHAO_ELL_BH/g1.14e13/g1.14e13.01024']
+printed datafiles above
+4.56122533891
+4.02191971968
+3.59590667304
+3.24922248224
+2.96048802717
+2.715517901
+2.50449836468
+2.32040553412
+2.15806863037
+2.01358955858
+1.88396936998
+1.76685998048
+1.66039448993
+1.56306837482
+1.47365451099
+1.39114123528
+1.31468643278
+1.24358298463
+1.17723240756
+1.11512449207
+1.0568213952
+1.00194508427
+0.950167330364
+0.901201664391
+0.854796856883
+0.810731593961
+0.768810098834
+0.728858507473
+0.690721850102
+0.654261522808
+0.619353158234
+Traceback (most recent call last):
+  File "picklerFor6_compaction.py", line 62, in <module>
+    pynbody.analysis.angmom.faceon(h1)
+  File "/home/lem507/.local/lib/python2.7/site-packages/pynbody/analysis/angmom.py", line 157, in faceon
+    return sideon(h, calc_faceon_matrix, **kwargs)
+  File "/home/lem507/.local/lib/python2.7/site-packages/pynbody/analysis/angmom.py", line 122, in sideon
+    vcen = halo.vel_center(h, retcen=True, cen_size=cen_size)
+  File "/home/lem507/.local/lib/python2.7/site-packages/pynbody/analysis/halo.py", line 226, in vel_center
+    raise ValueError, "Insufficient particles around center to get velocity"
+ValueError: Insufficient particles around center to get velocity

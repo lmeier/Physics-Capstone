@@ -113,7 +113,7 @@ for t, ms in timeMsDict.items():
     fit_vals = np.asarray([10.0**4.0, 10.0**6, 10.0**10, 10.0**14])
 
 
-plt.plot([0.0, 13.7], [0,0], color='k')
+plt.plot([0.0,14], [0,0], color='k')
 n = 1 #number of divisions
 
 all_delta_percentages = []
@@ -251,7 +251,7 @@ for i, name, p in zip(gal_arr, size_names, plot):
     #make empty array to do custom color map
     sm._A = []
     plt.colorbar(sm)
-    plt.plot([0.0, 12.5], [0,0])
+    #plt.plot([0.0, 12.5], [0,0])
     plt.ylabel("Delta SFR [M$_\odot$/ Year]", fontsize=18)
     plt.xlabel("Time [Gyr]", fontsize=18)
     plt.title( " NIHAO Galaxies")
