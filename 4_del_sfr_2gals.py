@@ -1,6 +1,7 @@
 import pynbody
 import numpy as np
 import pylab as plt
+import matplotlib.patheffects as path_effects
 import pynbody.analysis.profile as profile
 import pynbody.filt as filt
 import glob, os, pickle
@@ -155,7 +156,7 @@ g4 = ['g8.26e11', 'g5.55e11']
 #gal_all = ['g1.95e10', 'g4.86e10', 'g6.77e10', 'g9.59e10', 'g1.05e11', 'g1.37e11', 'g1.52e11',
 # 'g2.04e11', 'g3.06e11', 'g3.21e11', 'g4.90e11', 'g5.38e11', 'g5.55e11', 'g6.96e11',  'g7.55e11',
 # 'g8.26e11', 'g8.28e11', 'g1.05e11', 'g1.12e12', 'g2.79e12']
-gal_arr = [g2]
+gal_arr = [g3]
 #gal_arr =[gal_all]
 size_names = [ "2gals",]
 #size_names = ["1"]
@@ -242,7 +243,11 @@ for i, name, p in zip(gal_arr, size_names, plot):
         #label_long = g + ' ' +  str(conc0)[0:3]
         label_long = g
         linestyle='-'
-        plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),  label=label_long,  ls=linestyle)
+        #plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),  label=label_long,  ls=linestyle,path_effects=[path_effects.SimpleLineShadow(),path_effects.Normal()] )
+       plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),linewidth=2,  label=label_long,  ls=linestyle,path_effects=[path_effects.Stroke(linewidth=3, foreground='k'), path_effects.Normal()])
+        #plt.plot(a, b, color='k',  label=label_long,  ls=linestyle, linewidth)
+        #plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),  label=label_long,  ls=linestyle,
+        #plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),linewidth =3,  label=label_long,  ls=linestyle,)
 
     if p == False:
         break

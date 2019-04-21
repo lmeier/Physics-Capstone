@@ -61,33 +61,48 @@ for g in galaxies:
     x = []
     y = []
     z = []
-    print()
     for j in range(0, len(sfr)):
         if redshift[j] > 4:
             continue
         #check if it's within 0.05 of a whole number, label these points
         #print(redshift[j])
         z.append(redshift[j])
-        x.append(ms[j])
+        x.append(np.log10(ms[j]))
         if sfr < 10**-3.4: #previously -2.5
-            y.append(10**expForZeroSFR)
+            y.append(expForZeroSFR)
         else:
-            y.append(sfr[j])
+            y.append(np.log10(sfr[j]))
         grey = 1 - 0.9 #*random.random()
+
+
+    #x, y =  monotonic_x(x,y)
+    a1, = plt.plot(x,y, 'o-', color='red', label='Without AGN', alpha = 0.8)
+    print('main coloring ------')
+    num = 0
+    print(z)
+    for i in range(0, len(x)):
+        if (abs(z[i] - int(z[i] + 0.1)) < 0.05) and (z[i] < 0.013 or z[i] > 0.96):
+            print(z[i])
+            print(num)
+            #x1 = np.log10(x[i])
+            #y1 = np.log10(y[i])
+            plt.plot(x[i], y[i], linewidth=3,  marker='o',  color=colors[num], )
+            num +=1
+
 
     x2 = []
     y2 = []
     z2 = []
-    print()
-
     if g == 'g2.79e12':
         for j in range(0, len(agnsfr)):
-            x2.append(agnms[j])
+            if agnredshift[j] > 4:
+                continue
+            x2.append(np.log10(agnms[j]))
             z2.append(agnredshift[j])
             if sfr < 10**-3.4: #previously -2.5
-                y2.append(10**expForZeroSFR)
+                y2.append(expForZeroSFR)
             else:
-                y2.append(agnsfr[j])
+                y2.append(np.log10(agnsfr[j]))
 
         a2, = plt.plot(x2,y2, 'o-', color='black', label='With AGN', alpha = 0.8)
         num =0
@@ -95,36 +110,34 @@ for g in galaxies:
             if (abs(z[i] - int(z[i] + 0.1)) < 0.05) and (z[i] < 0.013 or z[i] > 0.96):
                 print(z[i])
                 print(num)
-                plt.plot(x[i], y[i], linewidth=3,  marker='o',  color=colors[num], )
+                plt.plot(x2[i], y2[i], linewidth=3,  marker='o',  color=colors[num], )
                 num += 1
-    #plt.plot(monotonic_x(x,y), 'o-', color=str(grey))
-    #x, y =  monotonic_x(x,y)
-    a1, = plt.plot(x,y, 'o-', color='red', label='Without AGN', alpha = 0.8)
 
-    num = 0
-    print(z)
-    for i in range(0, len(x)):
-        if (abs(z[i] - int(z[i] + 0.1)) < 0.05) and (z[i] < 0.013 or z[i] > 0.96):
-            print(z[i])
-            print(num)
-            plt.plot(x[i], y[i], linewidth=3,  marker='o',  color=colors[num], )
-            num +=1
+
+    #plt.plot(monotonic_x(x,y), 'o-', color=str(grey))
+
     #x2, y2 = monotonic_x(x2,y2)
     #draw high density rectangle for red sequence
-    x = [10**10.62, 10**10.88, 10**10.375, 10**10.1, 10**10.62]
-    y = [10**-0.83, 10**-1.13, 10**-1.6, 10**-1.3, 10**-0.83]
+    x = [10.62, 10.88, 10.375, 10.1, 10.62]
+    y = [-0.83, -1.13, -1.6, -1.3, -0.83]
     plt.plot(x,y, '-', color='k', linewidth=2, alpha =0.5)
     #draw high density triangle for blue cloud
-    x = [ 10**10.05, 10**10.4, 10**8.7, 10**8.6, 10**8.1, 10**10.05] #3rd to last 10**8.25
-    y = [ 10**0.5, 10**0.1, 10**-1.5, 10**-1.4, 10**-.95, 10**0.5] # 10**-1.25
+    x = [ 10.05, 10.4, 8.7, 8.6, 8.1, 10.05] #3rd to last 10**8.25
+    y = [ 0.5, 0.1, -1.5, -1.4, -.95, 0.5] # 10**-1.25
     plt.plot(x,y, '-', color='k', linewidth=2, alpha = 0.5)
     #these are redshift 0.02 - 0.085
-    #these are redshift 0.02 - 0.085
-    for count, col in enumerate(colors[0:5]):
-        fit_vals = np.asarray([10.0**4.0, 10.0**14]) #previous exponents were 6.0 and 12
-        fit = SFR0[count]*((fit_vals/10**10)**slope[count])
-        plt.plot(fit_vals, fit, color=col, linewidth=1.5, alpha=0.4)
 
+    for count, col in enumerate(colors[0:3]):
+        fit_vals = np.asarray([10.0**4.0, 10.0**14]) #previous exponents were 6.0 and 12
+        fit = np.log10(SFR0[count]*((fit_vals/10**10)**slope[count]))
+        plt.plot(np.log10(fit_vals), fit, color=col, linewidth=1.5, alpha=0.4)
+
+    slope = 0.833443019673
+    intercept = -8.41354010397
+    fit_vals = np.asarray([6.0, 13])
+    #fit = SFR0*((fit_vals/10**10)**slope)
+    fit = slope*fit_vals + intercept
+    plt.plot(fit_vals, fit, color='k', linewidth=1.5, alpha=0.4)
 
     y_3_patch = mpatches.Patch(color='y', label='z = 3', alpha=0.4)
     y_2_patch = mpatches.Patch(color='g', label='z = 2', alpha=0.4)
@@ -138,15 +151,15 @@ for g in galaxies:
     else:
         plt.legend(handles=[a1, y_3_patch, y_2_patch, y_1_patch, y_0_patch,], loc=2)
     #ax.set_facecolor('w')
-    plt.ylabel("SFR [M$_\odot$/ Year]", fontsize=18)
-    plt.xlabel("M$_{\star}$ [M$_\odot$]", fontsize=18)
-    plt.xscale('log')
-    plt.yscale('log')
+    plt.ylabel("log SFR [M$_\odot$/ Year]", fontsize=18)
+    plt.xlabel("log M$_{\star}$ [M$_\odot$]", fontsize=18)
+    #plt.xscale('log')
+    #plt.yscale('log')
     #Renzini plus one in all directions
-    plt.xlim(10**8, 10**12.5)
-    plt.ylim(10**-2.5, 10**1.8)
+    plt.xlim(8, 12.5)
+    plt.ylim(-2.5, 1.8)
     plt.title(g, fontsize=18)
-    plt.savefig('plots/3_'+ g + 'tracks.png', dpi=300)
+    plt.savefig('plots/8_'+ g + 'tracks.png', dpi=300)
     plt.show()
 
 

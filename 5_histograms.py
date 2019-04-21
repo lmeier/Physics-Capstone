@@ -82,7 +82,9 @@ def make_fits(galaxies):
     return avg_fit
 
 #def plot_hist(deltas=all_delta_after_log, concs=allConc, minConc = 8, maxConc =11, binCount=23, plotTitle='NIHAO'):
-def plot_hist(deltas, concs, minConc = 8, maxConc =11, binCount=23, plotTitle='NIHAO'):
+mins = []
+maxs = []
+def plot_hist(deltas, concs, pointToRemove=[-1], minConc = 8, maxConc =11, binCount=23, plotTitle='NIHAO'):
     all_delta_percentages = np.array(deltas)
     all_delta_percentages = all_delta_percentages[np.logical_not(np.isnan(all_delta_percentages))]
     n, bins, patches = plt.hist(all_delta_percentages, bins=binCount) #15 is good, as is 23
@@ -90,13 +92,39 @@ def plot_hist(deltas, concs, minConc = 8, maxConc =11, binCount=23, plotTitle='N
     res_lst = np.array([np.mean(A[A[:, 0] == i, 1]) for i in range(len(bins))])
     res_lst[np.isnan(res_lst)] = min(concentrations)
     res_lst = np.array(res_lst)
+    maxC = np.mean(res_lst)
+    minC = np.average(res_lst)
+    for i, j in zip(n, res_lst):
+        if i < 5:
+            continue
+        if j < minC:
+            minC = j
+        if j > maxC:
+            maxC = j
+    print(maxC)
+    maxs.append(maxC)
+    print(minC)
+    mins.append(minC)
+    print("n", n)
+    print('bins', bins)
+    print("A", A)
+    print("res_lst", res_lst)
+    minC = 6.5
+    maxC = 12.1
     cmap = plt.get_cmap('plasma')
-    sm = plt.cm.ScalarMappable(cmap='plasma', norm=plt.Normalize(minConc, maxConc))
+    #sm = plt.cm.ScalarMappable(cmap='plasma', norm=plt.Normalize(minConc, maxConc))
+    sm = plt.cm.ScalarMappable(cmap='plasma', norm=plt.Normalize(minC, maxC))
     #sm = plt.cm.ScalarMappable(cmap='plasma', norm=plt.Normalize(min(res_lst), max(res_lst)))
     sm._A = []
 
     for i in range(len(patches)):
-       patches[i].set_facecolor(cmap(norm(res_lst[i],min(res_lst), max(res_lst) )))
+       if i in pointToRemove:
+           patches[i].set_edgecolor('white')
+           patches[i].set_facecolor('white')
+       else:
+           #patches[i].set_facecolor(cmap(norm(res_lst[i],minConc, maxConc) ))
+           patches[i].set_facecolor(cmap(norm(res_lst[i],minC, maxC) ))
+           #patches[i].set_facecolor(cmap(norm(res_lst[i],min(res_lst), max(res_lst) )))
 
     plt.colorbar(sm)
     plt.ylabel("Number of galaxy datapoints", fontsize=18)
@@ -104,7 +132,7 @@ def plot_hist(deltas, concs, minConc = 8, maxConc =11, binCount=23, plotTitle='N
     plt.xlim(-3, 3)
     plt.yscale('log')
     plt.title(plotTitle)
-    plt.savefig(str("plots/5_hist_" + plotTitle.replace(" ", "") + ".png"), dpi=300)
+    plt.savefig(str("plots/9_hist_" + plotTitle.replace(" ", "") + ".png"), dpi=300)
     plt.show()
 
 def make_delta_conc_lists(gals, galDict, concDict, avgFitDict):
@@ -226,7 +254,7 @@ for g in galDict.keys():
 #NIHAO Classic
 avgFitDict = make_fits(galDict)
 delta_list, conc_list = make_delta_conc_lists(galDict.keys(), galDict, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, minConc=5, maxConc=11.5,  plotTitle='NIHAO Classic')
+plot_hist(delta_list, conc_list,pointToRemove=[2], minConc=5, maxConc=11.5,  plotTitle='NIHAO Classic')
 
 #NIHAO Classis High Mass
 avgFitDict = make_fits(galDict)
@@ -243,14 +271,14 @@ nihaoWithEll = galDict.copy()
 nihaoWithEll.update(galDictEllBH)
 avgFitDict = make_fits(nihaoWithEll)
 delta_list, conc_list = make_delta_conc_lists(nihaoWithEll.keys(), nihaoWithEll, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, minConc = 6, maxConc = 12, plotTitle="NIHAO with Ellipticals")
+plot_hist(delta_list, conc_list, pointToRemove = [0], minConc = 6, maxConc = 12, plotTitle="NIHAO with Ellipticals")
 
 #With AGN
 withAgn = galDictBH.copy()
 withAgn.update(galDictEllBH)
 avgFitDict = make_fits(withAgn)
 delta_list, conc_list = make_delta_conc_lists(withAgn.keys(), withAgn, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, minConc=5, maxConc=9.6,  plotTitle="Galaxies with AGN")
+plot_hist(delta_list, conc_list, pointToRemove=[1], minConc=5, maxConc=9.6,  plotTitle="Galaxies with AGN")
 
 #Without AGN
 withoutAgn = galDict.copy()
@@ -262,7 +290,8 @@ plot_hist(delta_list, conc_list, minConc = 5, maxConc = 15, plotTitle="Galaxies 
 print(galsNotIncluded)
 
 
-
+print(mins)
+print(maxs)
 
 
 

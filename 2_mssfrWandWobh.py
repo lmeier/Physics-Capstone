@@ -33,17 +33,26 @@ for g in galDictBH.keys():
     ms = propDict['ms'][-1]
     sfr = propDict['sfr'][-1]
     z = propDict['z'][-1]
-    msBH = propDictBH['ms'][-1]
-    sfrBH = propDictBH['sfr'][-1]
+    msBH = propDictBH['ms'][0]
+    sfrBH = propDictBH['sfr'][0]
+    msBHflast = propDictBH['ms'][-1]
+    sfrBHlast = propDictBH['sfr'][-1]
+    print("MS")
+    print(np.log10(propDictBH['ms']))
+    print("SFR")
+    print(np.log10(propDictBH['sfr']))
+
+
+
     zBH = propDictBH['z'][-1]
     if zBH > 0.03:
        continue
     print(g)
     print(z)
     print(zBH)
-    plt.plot([ms, msBH], [sfr, sfrBH], color='k',  alpha=0.2)
-    plt.plot(ms, sfr,  color ='r', marker = 'o', alpha=0.5, )
-    plt.plot(msBH, sfrBH,  color ='r', alpha=0.5, marker="^")
+    plt.plot(np.log10([ms, msBH]), np.log10([sfr, sfrBH]), color='k',  alpha=0.2)
+    plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5, )
+    plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^")
     galsTot += 1
 for g in galDictEllBH.keys():
     try:
@@ -54,10 +63,11 @@ for g in galDictEllBH.keys():
     ms = propDict['ms'][-1]
     sfr = propDict['sfr'][-1]
     msBH = propDictBH['ms'][-1]
+    print(propDictBH['ms'])
     sfrBH = propDictBH['sfr'][-1]
-    plt.plot([ms, msBH], [sfr, sfrBH], color='k', alpha=0.2)
-    plt.plot(ms, sfr,  color ='r', marker='o',  alpha=0.5, )
-    plt.plot(msBH, sfrBH,  color ='r', alpha=0.5, marker="^")
+    plt.plot(np.log10([ms, msBH]), np.log10([sfr, sfrBH]), color='k', alpha=0.2)
+    plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker='o',  alpha=0.5, )
+    plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^")
     galsTot += 1
 
 
@@ -81,13 +91,13 @@ popt, pcov = curve_fit(func, mstarAll, sfrAll)
 SFR0 = popt[0]
 slope = popt[1]
 '''
-x = [10**10.62, 10**10.88, 10**10.375, 10**10.1, 10**10.62]
-y = [10**-0.83, 10**-1.13, 10**-1.6, 10**-1.3, 10**-0.83]
-plt.plot(x,y, '-', color='r', linewidth=2, alpha =0.5)
+x = [10.62, 10.88, 10.375, 10.1, 10.62]
+y = [-0.83, -1.13, -1.6, -1.3, -0.83]
+plt.plot(x,y, '-', color='k', linewidth=2, alpha =0.5)
 #draw high density triangle for blue cloud
-x = [ 10**10.05, 10**10.4, 10**8.7, 10**8.6, 10**8.1, 10**10.05] #3rd to last 10**8.25
-y = [ 10**0.5, 10**0.1, 10**-1.5, 10**-1.4, 10**-.95, 10**0.5] # 10**-1.25
-plt.plot(x,y, '-', color='r', linewidth=2, alpha = 0.5)
+x = [ 10.05, 10.4, 8.7, 8.6, 8.1, 10.05] #3rd to last 10**8.25
+y = [ 0.5, 0.1, -1.5, -1.4, -.95, 0.5] # 10**-1.25
+plt.plot(x,y, '-', color='k', linewidth=2, alpha = 0.5)
 #these are redshift 0.02 - 0.085
 
 
@@ -102,11 +112,11 @@ plt.plot(fit_vals, fit, 'r-', label="fit")
 plt.legend(loc="upper left")
 '''
 #ax.set_facecolor('w')
-plt.ylabel("SFR [M${_\odot}$/ Year]", fontsize=18)
-plt.xlabel("M$_{\star}$ [M${_\odot}$]", fontsize=18)
+plt.ylabel("log SFR [M${_\odot}$/ Year]", fontsize=18)
+plt.xlabel("log M$_{\star}$ [M${_\odot}$]", fontsize=18)
 #plt.xlim(10**8, 10**12.5)
 #plt.ylim(10**-2.5, 10**1.8)
-plt.xscale('log')
-plt.yscale('log')
+#plt.xscale('log')
+#plt.yscale('log')
 plt.savefig('plots/2_mssfrzWandWOBH.png', dpi=300)
 plt.show()
