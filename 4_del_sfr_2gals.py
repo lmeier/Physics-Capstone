@@ -244,7 +244,7 @@ for i, name, p in zip(gal_arr, size_names, plot):
         label_long = g
         linestyle='-'
         #plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),  label=label_long,  ls=linestyle,path_effects=[path_effects.SimpleLineShadow(),path_effects.Normal()] )
-       plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),linewidth=2,  label=label_long,  ls=linestyle,path_effects=[path_effects.Stroke(linewidth=3, foreground='k'), path_effects.Normal()])
+        plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),linewidth=2,  label=label_long,  ls=linestyle,path_effects=[path_effects.Stroke(linewidth=3, foreground='k'), path_effects.Normal()])
         #plt.plot(a, b, color='k',  label=label_long,  ls=linestyle, linewidth)
         #plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),  label=label_long,  ls=linestyle,
         #plt.plot(a, b, color=cmap(norm(conc0, cur_min, cur_max)),linewidth =3,  label=label_long,  ls=linestyle,)
@@ -255,11 +255,13 @@ for i, name, p in zip(gal_arr, size_names, plot):
     sm = plt.cm.ScalarMappable(cmap='plasma', norm=plt.Normalize(vmin=cur_min, vmax=cur_max))
     #make empty array to do custom color map
     sm._A = []
-    plt.colorbar(sm)
+    cbar = plt.colorbar(sm,)
+    cbar.set_label('c', rotation=270, fontsize=18)
+
     #plt.plot([0.0, 12.5], [0,0])
-    plt.ylabel("Delta SFR [M$_\odot$/ Year]", fontsize=18)
-    plt.xlabel("Time [Gyr]", fontsize=18)
-    plt.title( " NIHAO Galaxies")
+    plt.ylabel("$\Delta$ log SFR [M$_\odot$/ year]", fontsize=18)
+    plt.xlabel("Time [gyr]", fontsize=18)
+    plt.title( "NIHAO Galaxies")
     plt.legend(prop={'size': 8}, loc='best')
     plt.savefig(str(fileBaseFalcon + "/capstoneFinal/plots/4_deltasfr2"  + ".png"), dpi=300)
     plt.show()

@@ -16,14 +16,17 @@ galDictEll = pickle.load(open("pickles/ELL_WOBH_NIHAOproperties.pkl", "rb"))
 #NIHAO non ellipical
 galDict = pickle.load(open("pickles/ALLjanNEW_NIHAOproperties.pkl", "rb"))
 galDictBH = pickle.load(open("pickles/NIHAO_BHproperties.pkl", "rb"))
-
-
-
+print(galDictEll.keys())
+print(galDictEllBH.keys())
+print(galDict.keys())
+print(galDictBH.keys())
+exit()
 sfr = []
 mstar = []
 sfrEll = []
 mstarEll = []
 galsTot = 0
+'''
 for g in galDictBH.keys():
     try:
         propDict = galDict[g]
@@ -33,15 +36,16 @@ for g in galDictBH.keys():
     ms = propDict['ms'][-1]
     sfr = propDict['sfr'][-1]
     z = propDict['z'][-1]
-    msBH = propDictBH['ms'][0]
-    sfrBH = propDictBH['sfr'][0]
-    msBHflast = propDictBH['ms'][-1]
+    msBH = propDictBH['ms'][-1]
+    sfrBH = propDictBH['sfr'][-1]
+    msBHlast = propDictBH['ms'][-1]
     sfrBHlast = propDictBH['sfr'][-1]
     print("MS")
     print(np.log10(propDictBH['ms']))
     print("SFR")
     print(np.log10(propDictBH['sfr']))
-
+    print("Last MS", np.log10(msBHlast))
+    print("Last SFR", np.log10(sfrBHlast))
 
 
     zBH = propDictBH['z'][-1]
@@ -54,6 +58,7 @@ for g in galDictBH.keys():
     plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5, )
     plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^")
     galsTot += 1
+'''
 for g in galDictEllBH.keys():
     try:
         propDict = galDictEll[g]
@@ -62,14 +67,20 @@ for g in galDictEllBH.keys():
        continue
     ms = propDict['ms'][-1]
     sfr = propDict['sfr'][-1]
+    z = propDict['z'][-1]
+    zBH = propDictBH['z'][-1]
     msBH = propDictBH['ms'][-1]
-    print(propDictBH['ms'])
     sfrBH = propDictBH['sfr'][-1]
+    msBHlast = propDictBH['ms'][-1]
+    sfrBHlast = propDictBH['sfr'][-1]
+    print(propDictBH['ms'])
+    print('gal', g)
+    print('zBH', zBH)
+
     plt.plot(np.log10([ms, msBH]), np.log10([sfr, sfrBH]), color='k', alpha=0.2)
     plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker='o',  alpha=0.5, )
     plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^")
     galsTot += 1
-
 
 print(galsTot)
 '''
