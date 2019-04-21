@@ -71,6 +71,9 @@ x = [ 10**10.15, 10**10.4, 10**8.7, 10**8.6, 10**8.1, 10**10.15] #3rd to last 10
 y = [ 10**0.3, 10**0.1, 10**-1.5, 10**-1.4, 10**-.95, 10**0.3] # 10**-1.25
 plt.plot(x,y, '-', color='r', linewidth=2)
 '''
+
+
+fig = plt.figure(figsize=(6,6))
 #bottom right
 # tl, tr, br, bl tl
 x = [10.62, 10.88, 10.375, 10.1, 10.62]
@@ -94,7 +97,7 @@ plt.plot(fit_vals, fit, 'r-', label="fit")
 
 plt.legend(loc="upper left")
 #ax.set_facecolor('w')
-plt.ylabel("log SFR [M${_\odot}$/ Year]", fontsize=18)
+plt.ylabel("log SFR [M${_\odot}$/ year]", fontsize=18)
 plt.xlabel("log M$_{\star}$ [M${_\odot}$]", fontsize=18)
 plt.xlim(8, 12.5)
 plt.ylim(-2.5, 1.8)

@@ -92,10 +92,10 @@ def plot_hist(deltas, concs, pointToRemove=[-1], minConc = 8, maxConc =11, binCo
     res_lst = np.array([np.mean(A[A[:, 0] == i, 1]) for i in range(len(bins))])
     res_lst[np.isnan(res_lst)] = min(concentrations)
     res_lst = np.array(res_lst)
-    maxC = np.mean(res_lst)
+    maxC = np.average(res_lst)
     minC = np.average(res_lst)
     for i, j in zip(n, res_lst):
-        if i < 5:
+        if i < 7:
             continue
         if j < minC:
             minC = j
@@ -125,8 +125,8 @@ def plot_hist(deltas, concs, pointToRemove=[-1], minConc = 8, maxConc =11, binCo
            #patches[i].set_facecolor(cmap(norm(res_lst[i],minConc, maxConc) ))
            patches[i].set_facecolor(cmap(norm(res_lst[i],minC, maxC) ))
            #patches[i].set_facecolor(cmap(norm(res_lst[i],min(res_lst), max(res_lst) )))
-
-    plt.colorbar(sm)
+    cbar = plt.colorbar(sm,)
+    cbar.set_label('c', rotation=270, fontsize=18)
     plt.ylabel("Number of galaxy datapoints", fontsize=18)
     plt.xlabel("Delta Log(SFR) [M$_\odot$/ Year]", fontsize=18)
     plt.xlim(-3, 3)

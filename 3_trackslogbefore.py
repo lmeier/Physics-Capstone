@@ -151,7 +151,7 @@ for g in galaxies:
     else:
         plt.legend(handles=[a1, y_3_patch, y_2_patch, y_1_patch, y_0_patch,], loc=2)
     #ax.set_facecolor('w')
-    plt.ylabel("log SFR [M$_\odot$/ Year]", fontsize=18)
+    plt.ylabel("log SFR [M$_\odot$/ year]", fontsize=18)
     plt.xlabel("log M$_{\star}$ [M$_\odot$]", fontsize=18)
     #plt.xscale('log')
     #plt.yscale('log')
