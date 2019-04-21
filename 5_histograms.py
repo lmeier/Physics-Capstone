@@ -95,7 +95,7 @@ def plot_hist(deltas, concs, pointToRemove=[-1], minConc = 8, maxConc =11, binCo
     maxC = np.average(res_lst)
     minC = np.average(res_lst)
     for i, j in zip(n, res_lst):
-        if i < 7:
+        if i < 5:
             continue
         if j < minC:
             minC = j
@@ -127,8 +127,8 @@ def plot_hist(deltas, concs, pointToRemove=[-1], minConc = 8, maxConc =11, binCo
            #patches[i].set_facecolor(cmap(norm(res_lst[i],min(res_lst), max(res_lst) )))
     cbar = plt.colorbar(sm,)
     cbar.set_label('c', rotation=270, fontsize=18)
-    plt.ylabel("Number of galaxy datapoints", fontsize=18)
-    plt.xlabel("Delta Log(SFR) [M$_\odot$/ Year]", fontsize=18)
+    plt.ylabel("number of galaxy datapoints", fontsize=18)
+    plt.xlabel("$\Delta$ log SFR [M$_\odot$/ year]", fontsize=18)
     plt.xlim(-3, 3)
     plt.yscale('log')
     plt.title(plotTitle)
@@ -259,7 +259,7 @@ plot_hist(delta_list, conc_list,pointToRemove=[2], minConc=5, maxConc=11.5,  plo
 #NIHAO Classis High Mass
 avgFitDict = make_fits(galDict)
 delta_list, conc_list = make_delta_conc_lists(highMassGals, galDict, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, minConc=6, maxConc=9.6, plotTitle = 'NIHAO Classic High Mass')
+plot_hist(delta_list, conc_list, pointToRemove=[21], minConc=6, maxConc=9.6, plotTitle = 'NIHAO Classic High Mass')
 
 #NIHAO Classis Low Mass
 avgFitDict = make_fits(galDict)
