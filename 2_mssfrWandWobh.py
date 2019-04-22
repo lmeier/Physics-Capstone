@@ -67,11 +67,11 @@ for g in galDictBH.keys():
     plt.plot(np.log10([ms, msBH]), np.log10([sfr, sfrBH]), color='k',  alpha=0.2)
     if labeled == False:
         plt.scatter(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5, label = 'Without AGN')
-        plt.scatter(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^", label = 'With AGN')
+        plt.scatter(np.log10(msBH), np.log10(sfrBH),  color ='k', alpha=0.6, marker="^", label = 'With AGN')
         labeled = True
     else:
         plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5,)
-        plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^", )
+        plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='k', alpha=0.6, marker="^", )
     galsTot += 1
 
 for g in galDictEllBH.keys():
@@ -97,7 +97,7 @@ for g in galDictEllBH.keys():
         sfrBH = 10**-6
     plt.plot(np.log10([ms, msBH]), np.log10([sfr, sfrBH]), color='k', alpha=0.2)
     plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker='o',  alpha=0.5, )
-    plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^")
+    plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='k', alpha=0.6, marker="^")
 
 
     #plt.plot(([ms, msBH]), ([sfr, sfrBH]), color='k', alpha=0.2)
@@ -155,5 +155,6 @@ plt.ylim(-2.5, 1.8)
 #plt.xscale('log')
 #plt.yscale('log')
 plt.tight_layout()
+plt.title("Effect of AGN")
 plt.savefig('plots/2_mssfrzWandWOBH.png', dpi=300)
 plt.show()
