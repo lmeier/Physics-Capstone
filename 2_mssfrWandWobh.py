@@ -9,14 +9,15 @@ import copy
 from scipy.optimize import curve_fit
 fileLocationBH = '/scratch/mb6605/gasol_32_180423/'
 
-
+#z0NIHAO_BHproperties.pkl
 #sfrArray, mStarArray = pickle.load(open("pickles/sfrAndMstarArray.pkl", "rb"))
 #galDictEllBH = pickle.load(open("pickles/AGN_ELL_NIHAOproperties.pkl", "rb"))
 galDictEllBH = pickle.load(open("/home/lem507/2018/pickles/z0AGN_ELL_NIHAOproperties.pkl", "rb"))
 galDictEll = pickle.load(open("pickles/ELL_WOBH_NIHAOproperties.pkl", "rb"))
 #NIHAO non ellipical
 galDict = pickle.load(open("pickles/ALLjanNEW_NIHAOproperties.pkl", "rb"))
-galDictBH = pickle.load(open("pickles/NIHAO_BHproperties.pkl", "rb"))
+#galDictBH = pickle.load(open("pickles/NIHAO_BHproperties.pkl", "rb"))
+galDictBH = pickle.load(open("/home/lem507/2018/pickles/z0NIHAO_BHproperties.pkl", "rb"))
 print(galDictEll.keys())
 print(galDictEllBH.keys())
 print(galDict.keys())

@@ -106,3 +106,33 @@ plt.title('z = 0')
 plt.tight_layout()
 plt.savefig('plots/1_mssfrz0logbefore.png', dpi=300)
 plt.show()
+
+
+fig = plt.figure(figsize=(6,6))
+#bottom right
+# tl, tr, br, bl tl
+x = [10.62, 10.88, 10.375, 10.1, 10.62]
+y = [-0.83, -1.13, -1.6, -1.3, -0.83]
+plt.plot(x,y, '-', color='k', linewidth=2, alpha =0.5)
+#draw high density triangle for blue cloud
+x = [ 10.05, 10.4, 8.7, 8.6, 8.1, 10.05] #3rd to last 10**8.25
+y = [ 0.5, 0.1, -1.5, -1.4, -.95, 0.5] # 10**-1.25
+plt.plot(x,y, '-', color='k', linewidth=2, alpha = 0.5)
+#these are redshift 0.02 - 0.085
+
+#plt.scatter(mStarArray, sfrArray, color='b', alpha=0.5)
+plt.scatter(logmstar, logsfr, color='r', alpha=0.5, label="NIHAO")
+
+
+#plt.legend(loc="upper left")
+#ax.set_facecolor('w')
+plt.ylabel("log SFR [M${_\odot}$/ year]", fontsize=18)
+plt.xlabel("log M$_{\star}$ [M${_\odot}$]", fontsize=18)
+plt.xlim(8, 12.5)
+plt.ylim(-2.5, 1.8)
+plt.title('z = 0')
+#plt.xscale('log')
+#plt.yscale('log')
+plt.tight_layout()
+plt.savefig('plots/1_mssfrz0NoElllogbefore.png', dpi=300)
+plt.show()
