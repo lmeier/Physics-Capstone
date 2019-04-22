@@ -12,12 +12,12 @@ fileLocationBH = '/scratch/mb6605/gasol_32_180423/'
 #z0NIHAO_BHproperties.pkl
 #sfrArray, mStarArray = pickle.load(open("pickles/sfrAndMstarArray.pkl", "rb"))
 #galDictEllBH = pickle.load(open("pickles/AGN_ELL_NIHAOproperties.pkl", "rb"))
-galDictEllBH = pickle.load(open("/home/lem507/2018/pickles/z0AGN_ELL_NIHAOproperties.pkl", "rb"))
+galDictEllBH = pickle.load(open("pickles/jsonAGN_ELL_NIHAOproperties.pkl", "rb"))
 galDictEll = pickle.load(open("pickles/ELL_WOBH_NIHAOproperties.pkl", "rb"))
 #NIHAO non ellipical
 galDict = pickle.load(open("pickles/ALLjanNEW_NIHAOproperties.pkl", "rb"))
 #galDictBH = pickle.load(open("pickles/NIHAO_BHproperties.pkl", "rb"))
-galDictBH = pickle.load(open("/home/lem507/2018/pickles/z0NIHAO_BHproperties.pkl", "rb"))
+galDictBH = pickle.load(open("pickles/jsonNIHAO_BHproperties.pkl", "rb"))
 print(galDictEll.keys())
 print(galDictEllBH.keys())
 print(galDict.keys())
@@ -35,13 +35,16 @@ for g in galDictBH.keys():
         propDictBH = galDictBH[g]
     except:
         continue
-    ms = propDict['ms'][-1]
-    sfr = propDict['sfr'][-1]
-    z = propDict['z'][-1]
-    msBH = propDictBH['ms'][-1]
-    sfrBH = propDictBH['sfr'][-1]
-    msBHlast = propDictBH['ms'][-1]
-    sfrBHlast = propDictBH['sfr'][-1]
+    try:
+        ms = propDict['ms'][-1]
+        sfr = propDict['sfr'][-1]
+        z = propDict['z'][-1]
+        msBH = propDictBH['ms'][-1]
+        sfrBH = propDictBH['sfr'][-1]
+        msBHlast = propDictBH['ms'][-1]
+        sfrBHlast = propDictBH['sfr'][-1]
+    except:
+        continue
     print("MS")
     print(np.log10(propDictBH['ms']))
     print("SFR")
@@ -49,6 +52,10 @@ for g in galDictBH.keys():
     print("Last MS", np.log10(msBHlast))
     print("Last SFR", np.log10(sfrBHlast))
 
+    if sfr < 10**-6:
+        sfr = 10**-6
+    if sfrBH < 10**-6:
+        sfrBH = 10**-6
 
     zBH = propDictBH['z'][-1]
     if zBH > 0.03:
@@ -60,7 +67,6 @@ for g in galDictBH.keys():
     plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5, )
     plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^")
     galsTot += 1
-'''
 
 for g in galDictEllBH.keys():
     try:
@@ -93,7 +99,6 @@ for g in galDictEllBH.keys():
     #plt.plot((msBH), (sfrBH),  color ='r', alpha=0.5, marker="^")
     galsTot += 1
 print(galsTot)
-'''
 '''
 for g in galDictEllBH.keys():
     propDict = galDictEll[g]
@@ -138,7 +143,10 @@ plt.ylabel("log SFR [M${_\odot}$/ year]", fontsize=18)
 plt.xlabel("log M$_{\star}$ [M${_\odot}$]", fontsize=18)
 #plt.xlim(10**8, 10**12.5)
 #plt.ylim(10**-2.5, 10**1.8)
+plt.xlim(8, 12.5)
+plt.ylim(-2.5, 1.8)
 #plt.xscale('log')
 #plt.yscale('log')
+plt.tight_layout()
 plt.savefig('plots/2_mssfrzWandWOBH.png', dpi=300)
 plt.show()

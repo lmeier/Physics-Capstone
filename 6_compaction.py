@@ -65,6 +65,7 @@ for gal in galaxies:
     plt.plot(surfden1kpclog10, ssfrlog10, '-o', color='k')
     plt.xlabel(r'log $\sum_i$ [$M_{\odot}$/kpc$^2$]', fontsize=18)
     plt.ylabel(r'log sSFR [gyr$^-1$]', fontsize=18)
+    plt.title(gal, fontsize=18)
     plt.xlim(7, 11)
     plt.ylim(max(ssfrlog10) + 0.5, min(ssfrlog10) - 0.5)
     ax.grid(True)
