@@ -105,12 +105,19 @@ def plot_hist(deltas, concs, pointToRemove=[-1], minConc = 8, maxConc =11, binCo
     maxs.append(maxC)
     print(minC)
     mins.append(minC)
+    '''
+    if plotTitle == 'Galaxies with AGN':
+        minC = 6.3
+        maxC = 8.3
+    '''
+    if minC < 5.5:
+        minC = 5.5
     print("n", n)
     print('bins', bins)
     print("A", A)
     print("res_lst", res_lst)
-    minC = 6.5
-    maxC = 12.1
+    #minC = 6.5
+    #maxC = 12.1
     cmap = plt.get_cmap('plasma')
     #sm = plt.cm.ScalarMappable(cmap='plasma', norm=plt.Normalize(minConc, maxConc))
     sm = plt.cm.ScalarMappable(cmap='plasma', norm=plt.Normalize(minC, maxC))
@@ -132,6 +139,7 @@ def plot_hist(deltas, concs, pointToRemove=[-1], minConc = 8, maxConc =11, binCo
     plt.xlim(-3, 3)
     plt.yscale('log')
     plt.title(plotTitle)
+    plt.tight_layout()
     plt.savefig(str("plots/10_hist_" + plotTitle.replace(" ", "") + ".png"), dpi=300)
     plt.show()
 
@@ -247,7 +255,7 @@ current_gals = [g for g in current_galDict.keys()]
 highMassGals = []
 lowMassGals = []
 for g in galDict.keys():
-    if int(g[-2:]) > 11 or (int(g[-2:]) == 11 and int(g[1]) >= 5):
+    if int(g[-2:]) > 11 or (int(g[-2:]) == 11 and int(g[1]) >= 2):
        highMassGals.append(g)
     else:
         lowMassGals.append(g)
@@ -259,12 +267,12 @@ plot_hist(delta_list, conc_list,pointToRemove=[2], minConc=5, maxConc=11.5,  plo
 #NIHAO Classis High Mass
 avgFitDict = make_fits(galDict)
 delta_list, conc_list = make_delta_conc_lists(highMassGals, galDict, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, pointToRemove=[21], minConc=6, maxConc=9.6, plotTitle = 'NIHAO Classic High Mass')
+plot_hist(delta_list, conc_list, pointToRemove=[3,4,5,], minConc=6, maxConc=9.6, plotTitle = 'NIHAO Classic High Mass')
 
 #NIHAO Classis Low Mass
 avgFitDict = make_fits(galDict)
 delta_list, conc_list = make_delta_conc_lists(lowMassGals, galDict, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, minConc=6, maxConc=15, plotTitle='NIHAO Classic Low Mass')
+plot_hist(delta_list, conc_list, pointToRemove = [0,1,2], minConc=6, maxConc=15, plotTitle='NIHAO Classic Low Mass')
 
 #NIHAO with Ellipticals
 nihaoWithEll = galDict.copy()
@@ -278,7 +286,7 @@ withAgn = galDictBH.copy()
 withAgn.update(galDictEllBH)
 avgFitDict = make_fits(withAgn)
 delta_list, conc_list = make_delta_conc_lists(withAgn.keys(), withAgn, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, pointToRemove=[], minConc=5, maxConc=9.6,  plotTitle="Galaxies with AGN")
+plot_hist(delta_list, conc_list, pointToRemove=[0,1,2,3,22], minConc=5, maxConc=9.6,  plotTitle="Galaxies with AGN")
 
 #Without AGN
 withoutAgn = galDict.copy()
