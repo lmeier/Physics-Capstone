@@ -146,9 +146,9 @@ for g in galaxies:
     #agn_legend = mlines.Line2D([], [], color='k', marker='X',
     #markersize=15, label='AGN gals')
     if g == 'g2.79e12':
-        plt.legend(handles=[a1, a2, y_3_patch, y_2_patch, y_1_patch, y_0_patch,], loc=2)
+        plt.legend(handles=[a1, a2, y_3_patch, y_2_patch, y_1_patch, y_0_patch,], loc=2, prop={'size': 8})
     else:
-        plt.legend(handles=[a1, y_3_patch, y_2_patch, y_1_patch, y_0_patch,], loc=2)
+        plt.legend(handles=[a1, y_3_patch, y_2_patch, y_1_patch, y_0_patch,], loc=2, prop={'size': 8})
     #ax.set_facecolor('w')
     plt.ylabel("log SFR [M$_\odot$/ year]", fontsize=18)
     plt.xlabel("log M$_{\star}$ [M$_\odot$]", fontsize=18)
