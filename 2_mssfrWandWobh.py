@@ -29,7 +29,7 @@ sfrEll = []
 mstarEll = []
 galsTot = 0
 labeled = False
-fig = plt.figure(figsize=(6,6))
+fig = plt.figure(figsize=(5,5))
 for g in galDictBH.keys():
     try:
         propDict = galDict[g]
