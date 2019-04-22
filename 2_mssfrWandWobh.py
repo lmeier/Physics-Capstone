@@ -11,7 +11,8 @@ fileLocationBH = '/scratch/mb6605/gasol_32_180423/'
 
 
 #sfrArray, mStarArray = pickle.load(open("pickles/sfrAndMstarArray.pkl", "rb"))
-galDictEllBH = pickle.load(open("pickles/AGN_ELL_NIHAOproperties.pkl", "rb"))
+#galDictEllBH = pickle.load(open("pickles/AGN_ELL_NIHAOproperties.pkl", "rb"))
+galDictEllBH = pickle.load(open("/home/lem507/2018/pickles/z0AGN_ELL_NIHAOproperties.pkl", "rb"))
 galDictEll = pickle.load(open("pickles/ELL_WOBH_NIHAOproperties.pkl", "rb"))
 #NIHAO non ellipical
 galDict = pickle.load(open("pickles/ALLjanNEW_NIHAOproperties.pkl", "rb"))
@@ -20,13 +21,13 @@ print(galDictEll.keys())
 print(galDictEllBH.keys())
 print(galDict.keys())
 print(galDictBH.keys())
-exit()
+
 sfr = []
 mstar = []
 sfrEll = []
 mstarEll = []
 galsTot = 0
-'''
+fig = plt.figure(figsize=(6,6))
 for g in galDictBH.keys():
     try:
         propDict = galDict[g]
@@ -59,6 +60,7 @@ for g in galDictBH.keys():
     plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^")
     galsTot += 1
 '''
+
 for g in galDictEllBH.keys():
     try:
         propDict = galDictEll[g]
@@ -76,13 +78,21 @@ for g in galDictEllBH.keys():
     print(propDictBH['ms'])
     print('gal', g)
     print('zBH', zBH)
-
+    if sfr < 10**-6:
+        sfr = 10**-6
+    if sfrBH < 10**-6:
+        sfrBH = 10**-6
     plt.plot(np.log10([ms, msBH]), np.log10([sfr, sfrBH]), color='k', alpha=0.2)
     plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker='o',  alpha=0.5, )
     plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^")
-    galsTot += 1
 
+
+    #plt.plot(([ms, msBH]), ([sfr, sfrBH]), color='k', alpha=0.2)
+    #plt.plot((ms), (sfr),  color ='r', marker='o',  alpha=0.5, )
+    #plt.plot((msBH), (sfrBH),  color ='r', alpha=0.5, marker="^")
+    galsTot += 1
 print(galsTot)
+'''
 '''
 for g in galDictEllBH.keys():
     propDict = galDictEll[g]
@@ -102,6 +112,7 @@ popt, pcov = curve_fit(func, mstarAll, sfrAll)
 SFR0 = popt[0]
 slope = popt[1]
 '''
+
 x = [10.62, 10.88, 10.375, 10.1, 10.62]
 y = [-0.83, -1.13, -1.6, -1.3, -0.83]
 plt.plot(x,y, '-', color='k', linewidth=2, alpha =0.5)
@@ -110,7 +121,6 @@ x = [ 10.05, 10.4, 8.7, 8.6, 8.1, 10.05] #3rd to last 10**8.25
 y = [ 0.5, 0.1, -1.5, -1.4, -.95, 0.5] # 10**-1.25
 plt.plot(x,y, '-', color='k', linewidth=2, alpha = 0.5)
 #these are redshift 0.02 - 0.085
-
 
 
 
@@ -123,7 +133,7 @@ plt.plot(fit_vals, fit, 'r-', label="fit")
 plt.legend(loc="upper left")
 '''
 #ax.set_facecolor('w')
-plt.ylabel("log SFR [M${_\odot}$/ Year]", fontsize=18)
+plt.ylabel("log SFR [M${_\odot}$/ year]", fontsize=18)
 plt.xlabel("log M$_{\star}$ [M${_\odot}$]", fontsize=18)
 #plt.xlim(10**8, 10**12.5)
 #plt.ylim(10**-2.5, 10**1.8)

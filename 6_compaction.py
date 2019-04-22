@@ -11,6 +11,7 @@ import sys, ast
 
 filename = '/scratch/database/nihao/nihao_classic/'
 galaxies = ['g1.12e12', 'g2.79e12']
+galaxies = ['g4.90e11', 'g8.26e11', 'g5.38e11', 'g1.37e11']
 if len(sys.argv) == 1:
     gal = raw_input('What galaxy do you want to plot')
 else:

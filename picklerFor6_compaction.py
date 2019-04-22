@@ -12,6 +12,8 @@ galaxies = ['g1.12e12', 'g2.79e12']
 
 filename = '/scratch/database/nihao/nihao_classic/'
 galaxies = ['g1.12e12', 'g2.79e12']
+galaxies = ['g4.90e11', 'g8.26e11', 'g5.38e11', 'g1.37e11']
+'''
 if len(sys.argv) == 1:
     gal = raw_input('What galaxy do you want to plot')
 else:
@@ -26,93 +28,99 @@ else:
         halos= pickle.load(open('pickles/allNihaoHalos.pkl'))[gal]
 
 #gal = galaxies[0]
-
-redshiftarray = []
-gasarray = []
-dmarray = []
-stararray = []
-sfrarray = []
-inflowarray = []
-outflowarray = []
-bharray = []
-
-surfden1kpc = []
-ssfr = []
-
-datafiles = sorted(glob.glob(filename+gal+'/' + gal + '.0????'))
-print(datafiles)
-print("printed datafiles above")
-#figure out how to do exactly ammount of halo_list ones...
 '''
-   for num, d in enumerate(ds[0:len(halo_list)]):
+haloDict= pickle.load(open('pickles/allNihaoHalos.pkl'))
+for gal in galaxies:
+    redshiftarray = []
+    gasarray = []
+    dmarray = []
+    stararray = []
+    sfrarray = []
+    inflowarray = []
+    outflowarray = []
+    bharray = []
+
+    surfden1kpc = []
+    ssfr = []
+    halos = haloDict[gal]
+    datafiles = sorted(glob.glob(filename+gal+'/' + gal + '.0????'))
+    print(datafiles)
+    print("printed datafiles above")
+    #figure out how to do exactly ammount of halo_list ones...
+    '''
+       for num, d in enumerate(ds[0:len(halo_list)]):
+            try:
+                sim = pynbody.load(d)
+                print(sim.properties['time'].in_units('Gyr'))
+                h = sim.halos()
+                h1 = h[halo_list[num]]
+    '''
+    for num, d in enumerate(datafiles[len(halos)*-1:]):
+        sim = pynbody.load(d)
+        if sim.properties['z'] > 5:
+            continue
+        h = sim.halos()
+        h1 = h[halos[num]]
+        h1.physical_units()
+        pynbody.analysis.halo.center(h1, mode='hyb')
+        pynbody.analysis.angmom.faceon(h1)
+
+        newstarmass = 0
+        stars, darkmatter, gas, inflow, outflow  = 0, 0, 0, 0, 0
+        for pos, mass, age  in zip(sim.star['pos'].in_units('kpc'), sim.star['mass'].in_units('Msol'), sim.star['age'].in_units('yr')):
+            if (pos[0]**2 + pos[1]**2 + pos[2]**2) < 1:
+                stars += mass
+            if math.sqrt(pos[0]**2 + pos[1]**2 + pos[2]**2) < 1.1 and math.sqrt(pos[0]**2 + pos[1]**2 + pos[2]**2) > 0.9:
+                if age <= (60 * (10**6)):
+                    newstarmass += mass
+
+        for pos, mass  in zip(sim.dm['pos'].in_units('kpc'), sim.dm['mass'].in_units('Msol')):
+            if (pos[0]**2 + pos[1]**2 + pos[2]**2) < 1:
+                darkmatter += mass
+        for pos,  mass, vel  in zip(sim.gas['pos'].in_units('kpc'), sim.gas['mass'].in_units('Msol'), sim.gas['vr'].in_units("kpc yr**-1")):
+            if (pos[0]**2 + pos[1]**2 + pos[2]**2) < 1:
+                gas += mass
+            if math.sqrt(pos[0]**2 + pos[1]**2 + pos[2]**2) < 1.1 and math.sqrt(pos[0]**2 + pos[1]**2 + pos[2]**2) > 0.9:
+                if vel > 0:
+                    outflow += (mass * vel)
+                else:
+                    inflow += (mass * vel * -1)
+
         try:
-            sim = pynbody.load(d)
-            print(sim.properties['time'].in_units('Gyr'))
-            h = sim.halos()
-            h1 = h[halo_list[num]]
-'''
-for num, d in enumerate(datafiles[len(halos)*-1:]):
-    sim = pynbody.load(d)
-    if sim.properties['z'] > 5:
-        continue
-    h = sim.halos()
-    h1 = h[halos[num]]
-    h1.physical_units()
-    pynbody.analysis.halo.center(h1, mode='hyb')
-    pynbody.analysis.angmom.faceon(h1)
-
-    newstarmass = 0
-    stars, darkmatter, gas, inflow, outflow  = 0, 0, 0, 0, 0
-    for pos, mass, age  in zip(sim.star['pos'].in_units('kpc'), sim.star['mass'].in_units('Msol'), sim.star['age'].in_units('yr')):
-        if (pos[0]**2 + pos[1]**2 + pos[2]**2) < 1:
-            stars += mass
-        if math.sqrt(pos[0]**2 + pos[1]**2 + pos[2]**2) < 1.1 and math.sqrt(pos[0]**2 + pos[1]**2 + pos[2]**2) > 0.9:
-            if age <= (60 * (10**6)):
-                newstarmass += mass
-
-    for pos, mass  in zip(sim.dm['pos'].in_units('kpc'), sim.dm['mass'].in_units('Msol')):
-        if (pos[0]**2 + pos[1]**2 + pos[2]**2) < 1:
-            darkmatter += mass
-    for pos,  mass, vel  in zip(sim.gas['pos'].in_units('kpc'), sim.gas['mass'].in_units('Msol'), sim.gas['vr'].in_units("kpc yr**-1")):
-        if (pos[0]**2 + pos[1]**2 + pos[2]**2) < 1:
-            gas += mass
-        if math.sqrt(pos[0]**2 + pos[1]**2 + pos[2]**2) < 1.1 and math.sqrt(pos[0]**2 + pos[1]**2 + pos[2]**2) > 0.9:
-            if vel > 0:
-                outflow += (mass * vel)
-            else:
-                inflow += (mass * vel * -1)
-
-    try:
-        mbh_f = filt.LowPass('tform','0 yr')
-        mbh = np.amax(list(h1.star[mbh_f]['mass'].in_units('Msol')))
-    except:
-        mbh = 0
+            mbh_f = filt.LowPass('tform','0 yr')
+            mbh = np.amax(list(h1.star[mbh_f]['mass'].in_units('Msol')))
+        except:
+            mbh = 0
 
 
-    bharray.append(mbh)
-    gasarray.append(gas)
-    stararray.append(stars)
-    dmarray.append(darkmatter)
-    sfrarray.append( (newstarmass / (60 * (10**6))) )
-    outflowarray.append(outflow / 0.2)
-    inflowarray.append(inflow / 0.2)
-    redshiftarray.append(sim.properties['z'])
+        bharray.append(mbh)
+        gasarray.append(gas)
+        stararray.append(stars)
+        dmarray.append(darkmatter)
+        sfrarray.append( (newstarmass / (60 * (10**6))) )
+        outflowarray.append(outflow / 0.2)
+        inflowarray.append(inflow / 0.2)
+        redshiftarray.append(sim.properties['z'])
 
 
-    smass10 = profile.Profile(h1.s, ndim=3, min='.001 kpc', max = '10 kpc')['mass'].sum()
-    smass = profile.Profile(h1.s, ndim=3, min='.001 kpc', max='1 kpc')['mass'].sum()
-    surfden1kpc.append(smass / math.pi)
-    ssfr.append(newstarmass / 0.05 / smass)
+        smass10 = profile.Profile(h1.s, ndim=3, min='.001 kpc', max = '10 kpc')['mass'].sum()
+        smass = profile.Profile(h1.s, ndim=3, min='.001 kpc', max='1 kpc')['mass'].sum()
+        surfden1kpc.append(smass / math.pi)
+        ssfr.append(newstarmass / 0.05 / smass)
 
-    print sim.properties['z']
+        print sim.properties['z']
 
 
-print('here already')
-propDict = {'redshiftarray': redshiftarray, 'gasarray': gasarray, 'dm': dmarray, 'bharray': bharray, 'star':stararray, 'sfr': sfrarray, 'outflowarray': outflowarray, 'inflowarray': inflowarray, 'surfden1kpc': surfden1kpc, 'ssfr': ssfr, 'smass10': smass10, 'smass': smass}
+        print('here already')
+        propDict = {'redshiftarray': redshiftarray, 'gasarray': gasarray, 'dm': dmarray, 'bharray': bharray, 'star':stararray, 'sfr': sfrarray, 'outflowarray': outflowarray, 'inflowarray': inflowarray, 'surfden1kpc': surfden1kpc, 'ssfr': ssfr, 'smass10': smass10, 'smass': smass}
 
-with open('pickles/6n_' + gal + '.pkl', 'wb') as fp:
-    pickle.dump(propDict, fp)
+        with open('pickles/6n_' + gal + '.pkl', 'wb') as fp:
+            pickle.dump(propDict, fp)
 
+
+
+
+exit()
 
 
 

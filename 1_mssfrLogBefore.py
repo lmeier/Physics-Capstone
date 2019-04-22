@@ -86,7 +86,6 @@ plt.plot(x,y, '-', color='k', linewidth=2, alpha = 0.5)
 #these are redshift 0.02 - 0.085
 
 #plt.scatter(mStarArray, sfrArray, color='b', alpha=0.5)
-
 plt.scatter(logmstar, logsfr, color='r', alpha=0.5, label="NIHAO")
 plt.scatter(np.log10(mstarEll), np.log10(sfrEll), color ='r', alpha=0.5, marker="^", label="NIHAO Ellipticals")
 
@@ -104,5 +103,6 @@ plt.ylim(-2.5, 1.8)
 plt.title('z = 0')
 #plt.xscale('log')
 #plt.yscale('log')
+plt.tight_layout()
 plt.savefig('plots/1_mssfrz0logbefore.png', dpi=300)
 plt.show()
