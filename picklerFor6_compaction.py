@@ -13,6 +13,7 @@ galaxies = ['g1.12e12', 'g2.79e12']
 filename = '/scratch/database/nihao/nihao_classic/'
 galaxies = ['g1.12e12', 'g2.79e12']
 galaxies = ['g4.90e11', 'g8.26e11', 'g5.38e11', 'g1.37e11']
+galaxies = ['g4.90e11']
 '''
 if len(sys.argv) == 1:
     gal = raw_input('What galaxy do you want to plot')
@@ -44,6 +45,9 @@ for gal in galaxies:
     ssfr = []
     halos = haloDict[gal]
     datafiles = sorted(glob.glob(filename+gal+'/' + gal + '.0????'))
+    if len(halos) < 32:
+        halos = np.ones(len(datafiles))
+    print(halos)
     print(datafiles)
     print("printed datafiles above")
     #figure out how to do exactly ammount of halo_list ones...
