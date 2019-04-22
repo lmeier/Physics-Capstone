@@ -11,7 +11,7 @@ import sys, ast
 
 filename = '/scratch/database/nihao/nihao_classic/'
 galaxies = ['g1.12e12', 'g2.79e12']
-galaxies = ['g4.90e11', 'g8.26e11', 'g5.38e11', 'g1.37e11']
+#galaxies = ['g4.90e11', 'g8.26e11', 'g5.38e11', 'g1.37e11']
 if len(sys.argv) == 1:
     gal = raw_input('What galaxy do you want to plot')
 else:
@@ -23,7 +23,7 @@ plot_bh = raw_input('Plot bh? Y for yes, anything else for no. ')
 
 #with open('pickles/6_' + gal + '.pkl', 'wb') as fp:
 for gal in galaxies:
-    pD = pickle.load(open('pickles/6n_' + gal + '.pkl', 'rb'))
+    pD = pickle.load(open('pickles/6_' + gal + '.pkl', 'rb'))
 
 
     fig, ax1 = plt.subplots()
@@ -83,6 +83,7 @@ for gal in galaxies:
                 ax.annotate('z =' + str(round(txt, 1)), xy=((surfden1kpclog10[count]) + 0.1, ssfrlog10[count] + 0.1  ))
                 last = txt
         count += 1
+    plt.tight_layout()
     plt.savefig('plots/6_' + gal + 'ssfr.png', dpi=300)
     plt.show()
     plt.close()
