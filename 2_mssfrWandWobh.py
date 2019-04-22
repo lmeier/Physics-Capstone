@@ -29,7 +29,7 @@ sfrEll = []
 mstarEll = []
 galsTot = 0
 labeled = False
-fig = plt.figure(figsize=(5,5))
+fig = plt.figure(figsize=(6, 6))
 for g in galDictBH.keys():
     try:
         propDict = galDict[g]
@@ -155,6 +155,6 @@ plt.ylim(-2.5, 1.8)
 #plt.xscale('log')
 #plt.yscale('log')
 plt.tight_layout()
-plt.title("Effect of AGN")
+#plt.title("effect of agn")
 plt.savefig('plots/2_mssfrzWandWOBH.png', dpi=300)
 plt.show()
