@@ -13,7 +13,7 @@ fileLocationBH = '/scratch/mb6605/gasol_32_180423/'
 
 #sfrArray, mStarArray = pickle.load(open("pickles/sfrAndMstarArray.pkl", "rb"))
 galDict = pickle.load(open("pickles/ALLjanNEW_NIHAOproperties.pkl", "rb"))
-galDictEll = pickle.load(open("pickles/AGN_ELL_NIHAOproperties.pkl", "rb"))
+galDictEll = pickle.load(open("pickles/jsonAGN_ELL_NIHAOproperties.pkl", "rb"))
 sfr = []
 mstar = []
 sfrEll = []
@@ -44,8 +44,6 @@ for i, j in zip(sfr, mstar):
     if i > 0:
         logsfr.append(np.log10(i))
         logmstar.append(np.log10(j))
-#logsfr= np.log10(sfr)
-#logmstar = np.log10(mstar)
 slope, intercept, r_value, p_value, std_err = stats.linregress(logmstar, logsfr)
 print(slope)
 print(intercept)

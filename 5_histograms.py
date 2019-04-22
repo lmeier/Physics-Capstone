@@ -132,7 +132,7 @@ def plot_hist(deltas, concs, pointToRemove=[-1], minConc = 8, maxConc =11, binCo
     plt.xlim(-3, 3)
     plt.yscale('log')
     plt.title(plotTitle)
-    plt.savefig(str("plots/9_hist_" + plotTitle.replace(" ", "") + ".png"), dpi=300)
+    plt.savefig(str("plots/10_hist_" + plotTitle.replace(" ", "") + ".png"), dpi=300)
     plt.show()
 
 def make_delta_conc_lists(gals, galDict, concDict, avgFitDict):
@@ -226,11 +226,11 @@ def make_delta_conc_lists(gals, galDict, concDict, avgFitDict):
 names =["Total_NIHAO_Classic", "NIHAO_Classic_High_Mass",
 "NIHAO_Classic_Low_Mass", "NIHAO_Ellipticals_All", "NIHAO_With_AGN", "NIHAO_Without_AGN"]
 
-galDictEllBH = pickle.load(open("pickles/AGN_ELL_NIHAOproperties.pkl", "rb"))
+galDictEllBH = pickle.load(open("pickles/jsonAGN_ELL_NIHAOproperties.pkl", "rb"))
 galDictEll = pickle.load(open("pickles/ELL_WOBH_NIHAOproperties.pkl", "rb"))
 #NIHAO non ellipical
 galDict = pickle.load(open("pickles/ALLjanNEW_NIHAOproperties.pkl", "rb"))
-galDictBH = pickle.load(open("pickles/NIHAO_BHproperties.pkl", "rb"))
+galDictBH = pickle.load(open("pickles/jsonNIHAO_BHproperties.pkl", "rb"))
 
 #DMO2 because thats the right conc's
 concDictNIHAO = pickle.load(open('/home/lem507/2018/pickles/concentrationsDMO2.pkl', 'rb'))
@@ -271,14 +271,14 @@ nihaoWithEll = galDict.copy()
 nihaoWithEll.update(galDictEllBH)
 avgFitDict = make_fits(nihaoWithEll)
 delta_list, conc_list = make_delta_conc_lists(nihaoWithEll.keys(), nihaoWithEll, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, pointToRemove = [0], minConc = 6, maxConc = 12, plotTitle="NIHAO with Ellipticals")
+plot_hist(delta_list, conc_list, pointToRemove = [0, 1, 2], minConc = 6, maxConc = 12, plotTitle="NIHAO with Ellipticals")
 
 #With AGN
 withAgn = galDictBH.copy()
 withAgn.update(galDictEllBH)
 avgFitDict = make_fits(withAgn)
 delta_list, conc_list = make_delta_conc_lists(withAgn.keys(), withAgn, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, pointToRemove=[1], minConc=5, maxConc=9.6,  plotTitle="Galaxies with AGN")
+plot_hist(delta_list, conc_list, pointToRemove=[], minConc=5, maxConc=9.6,  plotTitle="Galaxies with AGN")
 
 #Without AGN
 withoutAgn = galDict.copy()

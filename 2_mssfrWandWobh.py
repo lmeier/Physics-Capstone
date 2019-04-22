@@ -28,6 +28,7 @@ mstar = []
 sfrEll = []
 mstarEll = []
 galsTot = 0
+labeled = False
 fig = plt.figure(figsize=(6,6))
 for g in galDictBH.keys():
     try:
@@ -64,8 +65,13 @@ for g in galDictBH.keys():
     print(z)
     print(zBH)
     plt.plot(np.log10([ms, msBH]), np.log10([sfr, sfrBH]), color='k',  alpha=0.2)
-    plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5, )
-    plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^")
+    if labeled == False:
+        plt.scatter(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5, label = 'Without AGN')
+        plt.scatter(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^", label = 'With AGN')
+        labeled = True
+    else:
+        plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5,)
+        plt.plot(np.log10(msBH), np.log10(sfrBH),  color ='r', alpha=0.5, marker="^", )
     galsTot += 1
 
 for g in galDictEllBH.keys():
@@ -141,6 +147,7 @@ plt.legend(loc="upper left")
 #ax.set_facecolor('w')
 plt.ylabel("log SFR [M${_\odot}$/ year]", fontsize=18)
 plt.xlabel("log M$_{\star}$ [M${_\odot}$]", fontsize=18)
+plt.legend(loc="upper left")
 #plt.xlim(10**8, 10**12.5)
 #plt.ylim(10**-2.5, 10**1.8)
 plt.xlim(8, 12.5)
