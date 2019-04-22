@@ -34,7 +34,7 @@ def monotonic_x(old_x, old_y):
     return new_x, new_y
 
 galaxies = ['g2.79e12', 'g1.37e11', 'g5.38e11', 'g8.26e11', 'g4.90e11']
-
+galaxies = ['g1.12e12']
 for g in galaxies:
     propDict = galDict[g]
     ms = propDict['ms']
