@@ -54,8 +54,7 @@ for g in galaxies:
     slope = [.9, .9, .9, 0.77, .83]
     colors = ['y', 'g', 'b', 'k', 'r']
     num = 0
-    fig = plt.figure(figsize=(10,10))
-
+    fig = plt.figure(figsize=(6,6))
     expForZeroSFR = -3.4
 
     x = []
@@ -159,6 +158,7 @@ for g in galaxies:
     plt.xlim(8, 12.5)
     plt.ylim(-2.5, 1.8)
     plt.title(g, fontsize=18)
+    plt.tight_layout()
     plt.savefig('plots/8_'+ g + 'tracks.png', dpi=300)
     plt.show()
 
