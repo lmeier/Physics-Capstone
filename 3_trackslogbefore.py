@@ -75,7 +75,7 @@ for g in galaxies:
 
 
     #x, y =  monotonic_x(x,y)
-    a1, = plt.plot(x,y, 'o-', color='red', label='Without AGN', alpha = 0.8)
+    a1, = plt.plot(x,y, 'o-', color='red', label='Without BH', alpha = 0.8)
     print('main coloring ------')
     num = 0
     print(z)
@@ -103,7 +103,7 @@ for g in galaxies:
             else:
                 y2.append(np.log10(agnsfr[j]))
 
-        a2, = plt.plot(x2,y2, 'o-', color='black', label='With AGN', alpha = 0.8)
+        a2, = plt.plot(x2,y2, 'o-', color='black', label='With BH', alpha = 0.8)
         num =0
         for i in range(0, len(x)):
             if (abs(z[i] - int(z[i] + 0.1)) < 0.05) and (z[i] < 0.013 or z[i] > 0.96):
