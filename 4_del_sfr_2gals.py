@@ -261,7 +261,7 @@ for i, name, p in zip(gal_arr, size_names, plot):
     #plt.plot([0.0, 12.5], [0,0])
     plt.ylim(-0.7, 0.7)
     plt.ylabel("$\Delta$ log SFR [M$_\odot$/ year]", fontsize=18)
-    plt.xlabel("Time [gyr]", fontsize=18)
+    plt.xlabel("Time [Gyr]", fontsize=18)
     plt.title( "NIHAO Galaxies")
     plt.legend(prop={'size': 8}, loc='best')
     plt.savefig(str(fileBaseFalcon + "/capstoneFinal/plots/4_deltasfr2"  + ".png"), dpi=300)

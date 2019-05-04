@@ -9,6 +9,8 @@ import copy
 from scipy.optimize import curve_fit
 from scipy import stats
 fileLocationBH = '/scratch/mb6605/gasol_32_180423/'
+plt.rcParams['legend.numpoints'] = 1
+plt.rcParams['legend.scatterpoints'] = 1
 
 
 #sfrArray, mStarArray = pickle.load(open("pickles/sfrAndMstarArray.pkl", "rb"))
@@ -88,14 +90,14 @@ plt.plot(x,y, '-', color='k', linewidth=2, alpha = 0.5)
 
 #plt.scatter(mStarArray, sfrArray, color='b', alpha=0.5)
 plt.scatter(logmstar, logsfr, color='r', alpha=0.5, label="NIHAO")
-plt.scatter(np.log10(mstarEll), np.log10(sfrEll), color ='r', alpha=0.5, marker="^", label="NIHAO Ellipticals")
+plt.scatter(np.log10(mstarEll), np.log10(sfrEll), color ='k', alpha=0.5, marker="^", label="NIHAO Ellipticals")
 
 fit_vals = np.asarray([6.0, 13])
 #fit = SFR0*((fit_vals/10**10)**slope)
 fit = slope*fit_vals + intercept
 plt.plot(fit_vals, fit, 'r-', label="fit")
 
-plt.legend(loc="upper left")
+plt.legend(loc="upper left", numpoints=1)
 #ax.set_facecolor('w')
 plt.ylabel("log SFR [M${_\odot}$/ year]", fontsize=18)
 plt.xlabel("log M$_{\star}$ [M${_\odot}$]", fontsize=18)
