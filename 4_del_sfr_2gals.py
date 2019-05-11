@@ -12,6 +12,25 @@ import json
 from scipy import stats
 from scipy.optimize import curve_fit
 from scipy.stats import linregress
+import matplotlib as mpl
+mpl.rcParams['axes.linewidth'] = 1.3
+mpl.rcParams['xtick.labelsize'] = 16
+mpl.rcParams['ytick.labelsize'] = 16
+mpl.rcParams['axes.labelsize'] = 18
+mpl.rcParams['legend.numpoints'] = 1
+mpl.rcParams['legend.scatterpoints'] = 1
+mpl.rcParams['legend.fontsize'] = 14
+mpl.rcParams['legend.frameon'] = False
+mpl.rcParams['legend.handlelength'] = 1.4
+mpl.rcParams['legend.handletextpad'] = 0.5
+#mpl.rcParams['text.usetex'] = True
+mpl.rcParams['font.family'] = 'serif'
+mpl.rcParams['font.serif'] = 'cmr10'
+mpl.rcParams['mathtext.fontset'] = 'cm'
+#mpl.rcParams['mathtext.rm'] = 'serif'
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype'] = 42
+mpl.rcParams['axes.unicode_minus']=False
 
 fileLocation = '/scratch/database/nihao/gasoline2.1/'
 fileLocationELL = '/scratch/mb6605/NIHAO_ELL_BH/'

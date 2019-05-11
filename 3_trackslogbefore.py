@@ -8,6 +8,26 @@ import math
 import matplotlib.patches as mpatches
 import matplotlib.lines as mlines
 import copy
+import matplotlib as mpl
+mpl.rcParams['axes.linewidth'] = 1.3
+mpl.rcParams['xtick.labelsize'] = 16
+mpl.rcParams['ytick.labelsize'] = 16
+mpl.rcParams['axes.labelsize'] = 18
+mpl.rcParams['legend.numpoints'] = 1
+mpl.rcParams['legend.scatterpoints'] = 1
+mpl.rcParams['legend.fontsize'] = 14
+mpl.rcParams['legend.frameon'] = False
+mpl.rcParams['legend.handlelength'] = 1.4
+mpl.rcParams['legend.handletextpad'] = 0.5
+#mpl.rcParams['text.usetex'] = True
+mpl.rcParams['font.family'] = 'serif'
+mpl.rcParams['font.serif'] = 'cmr10'
+mpl.rcParams['mathtext.fontset'] = 'cm'
+#mpl.rcParams['mathtext.rm'] = 'serif'
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype'] = 42
+mpl.rcParams['axes.unicode_minus']=False
+
 
 falconBase = '/home/lem507/2018/pickles/'
 #agngalDict = pickle.load(open('pickles/agnProperties.pkl', 'rb'))
@@ -117,13 +137,17 @@ for g in galaxies:
 
     #x2, y2 = monotonic_x(x2,y2)
     #draw high density rectangle for red sequence
-    x = [10.62, 10.88, 10.375, 10.1, 10.62]
-    y = [-0.83, -1.13, -1.6, -1.3, -0.83]
+
+    x = [10.8, 10.98, 10.38, 10.2, 10.8]
+    y = [-.95, -1.20, -1.6, -1.35, -.95]
     plt.plot(x,y, '-', color='k', linewidth=2, alpha =0.5)
-    #draw high density triangle for blue cloud
-    x = [ 10.05, 10.4, 8.7, 8.6, 8.1, 10.05] #3rd to last 10**8.25
-    y = [ 0.5, 0.1, -1.5, -1.4, -.95, 0.5] # 10**-1.25
+
+    #top left box
+    x = [ 10.15, 10.5, 8.8, 8.1, 10.15] #3rd to last 10**8.25
+    y = [ 0.25, -0.1, -1.6, -.95, 0.25] # 10**-1.25
     plt.plot(x,y, '-', color='k', linewidth=2, alpha = 0.5)
+
+
     #these are redshift 0.02 - 0.085
 
     for count, col in enumerate(colors[0:3]):

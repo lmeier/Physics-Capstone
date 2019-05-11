@@ -5,13 +5,29 @@ import pynbody.analysis.profile as profile
 import glob, os, pickle
 import math
 import sys, ast
-
-
-
-
+import matplotlib as mpl
+mpl.rcParams['axes.linewidth'] = 1.3
+mpl.rcParams['xtick.labelsize'] = 16
+mpl.rcParams['ytick.labelsize'] = 16
+mpl.rcParams['axes.labelsize'] = 18
+mpl.rcParams['legend.numpoints'] = 1
+mpl.rcParams['legend.scatterpoints'] = 1
+mpl.rcParams['legend.fontsize'] = 14
+mpl.rcParams['legend.frameon'] = False
+mpl.rcParams['legend.handlelength'] = 1.4
+mpl.rcParams['legend.handletextpad'] = 0.5
+#mpl.rcParams['text.usetex'] = True
+mpl.rcParams['font.family'] = 'serif'
+mpl.rcParams['font.serif'] = 'cmr10'
+mpl.rcParams['mathtext.fontset'] = 'cm'
+#mpl.rcParams['mathtext.rm'] = 'serif'
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype'] = 42
+mpl.rcParams['axes.unicode_minus']=False
 filename = '/scratch/database/nihao/nihao_classic/'
 galaxies = ['g1.12e12', 'g2.79e12']
 #galaxies = ['g4.90e11', 'g8.26e11', 'g5.38e11', 'g1.37e11']
+#galaxies = ['g4.90e11']
 if len(sys.argv) == 1:
     gal = raw_input('What galaxy do you want to plot')
 else:
@@ -45,6 +61,7 @@ for gal in galaxies:
     ax2.plot(pD['redshiftarray'], pD['outflowarray'], color="magenta", label="outflow")
     plt.legend(loc=4, fontsize="medium", frameon=False)
     ax2.set_ylim(10**(-1.5), 10**4.5)
+    ax2.set_ylim(10**(-4), 10**4.5)
     ax2.semilogy()
     ax1.set_ylabel(r"log M [[$M_{\odot}$]", fontsize=18)
     ax2.set_ylabel(r"log Mdot [$M_{\odot}$ / year]", fontsize=18)
@@ -67,6 +84,7 @@ for gal in galaxies:
     plt.ylabel(r'log sSFR [gyr$^-1$]', fontsize=18)
     plt.title(gal, fontsize=18)
     plt.xlim(7, 11)
+    plt.xlim(6, 11)
     plt.ylim(max(ssfrlog10) + 0.5, min(ssfrlog10) - 0.5)
     ax.grid(True)
     count = 0
