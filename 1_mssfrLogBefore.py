@@ -9,9 +9,27 @@ import copy
 from scipy.optimize import curve_fit
 from scipy import stats
 fileLocationBH = '/scratch/mb6605/gasol_32_180423/'
-plt.rcParams['legend.numpoints'] = 1
-plt.rcParams['legend.scatterpoints'] = 1
 
+import matplotlib as mpl
+
+mpl.rcParams['axes.linewidth'] = 1.3
+mpl.rcParams['xtick.labelsize'] = 16
+mpl.rcParams['ytick.labelsize'] = 16
+mpl.rcParams['axes.labelsize'] = 18
+mpl.rcParams['legend.numpoints'] = 1
+mpl.rcParams['legend.scatterpoints'] = 1
+mpl.rcParams['legend.fontsize'] = 14
+mpl.rcParams['legend.frameon'] = False
+mpl.rcParams['legend.handlelength'] = 1.4
+mpl.rcParams['legend.handletextpad'] = 0.5
+#mpl.rcParams['text.usetex'] = True
+mpl.rcParams['font.family'] = 'serif'
+mpl.rcParams['font.serif'] = 'cmr10'
+mpl.rcParams['mathtext.fontset'] = 'cm'
+#mpl.rcParams['mathtext.rm'] = 'serif'
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype'] = 42
+mpl.rcParams['axes.unicode_minus']=False
 
 #sfrArray, mStarArray = pickle.load(open("pickles/sfrAndMstarArray.pkl", "rb"))
 galDict = pickle.load(open("pickles/ALLjanNEW_NIHAOproperties.pkl", "rb"))
