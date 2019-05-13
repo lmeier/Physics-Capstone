@@ -25,8 +25,8 @@ mpl.rcParams['pdf.fonttype'] = 42
 mpl.rcParams['ps.fonttype'] = 42
 mpl.rcParams['axes.unicode_minus']=False
 filename = '/scratch/database/nihao/nihao_classic/'
-galaxies = ['g1.12e12', 'g2.79e12']
-#galaxies = ['g4.90e11', 'g8.26e11', 'g5.38e11', 'g1.37e11']
+#galaxies = ['g1.12e12', 'g2.79e12']
+galaxies = ['g4.90e11', 'g8.26e11', 'g5.38e11', 'g1.37e11']
 #galaxies = ['g4.90e11']
 if len(sys.argv) == 1:
     gal = raw_input('What galaxy do you want to plot')
@@ -39,7 +39,7 @@ plot_bh = raw_input('Plot bh? Y for yes, anything else for no. ')
 
 #with open('pickles/6_' + gal + '.pkl', 'wb') as fp:
 for gal in galaxies:
-    pD = pickle.load(open('pickles/6_' + gal + '.pkl', 'rb'))
+    pD = pickle.load(open('pickles/6n_' + gal + '.pkl', 'rb'))
 
 
     fig, ax1 = plt.subplots()
@@ -81,7 +81,7 @@ for gal in galaxies:
     fig, ax = plt.subplots()
     plt.plot(surfden1kpclog10, ssfrlog10, '-o', color='k')
     plt.xlabel(r'log $\sum_i$ [$M_{\odot}$/kpc$^2$]', fontsize=18)
-    plt.ylabel(r'log sSFR [gyr$^-1$]', fontsize=18)
+    plt.ylabel(r'log sSFR [Gyr$^-1$]', fontsize=18)
     plt.title(gal, fontsize=18)
     plt.xlim(7, 11)
     plt.xlim(6, 11)
