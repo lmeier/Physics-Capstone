@@ -85,8 +85,8 @@ for g in galDictBH.keys():
     print(zBH)
     plt.plot(np.log10([ms, msBH]), np.log10([sfr, sfrBH]), color='k',  alpha=0.2)
     if labeled == False:
-        plt.scatter(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5, label = 'Without AGN')
-        plt.scatter(np.log10(msBH), np.log10(sfrBH),  color ='k', alpha=0.6, marker="^", label = 'With AGN')
+        plt.scatter(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5, label = 'Without BH')
+        plt.scatter(np.log10(msBH), np.log10(sfrBH),  color ='k', alpha=0.6, marker="^", label = 'With BH')
         labeled = True
     else:
         plt.plot(np.log10(ms), np.log10(sfr),  color ='r', marker = 'o', alpha=0.5,)

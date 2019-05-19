@@ -106,7 +106,7 @@ plt.plot(x,y, '-', color='k', linewidth=2, alpha = 0.5)
 
 #plt.scatter(mStarArray, sfrArray, color='b', alpha=0.5)
 plt.scatter(logmstar, logsfr, color='r', alpha=0.5, label="NIHAO")
-plt.scatter(np.log10(mstarEll), np.log10(sfrEll), color ='k', alpha=0.5, marker="^", label="NIHAO Ellipticals")
+plt.scatter(np.log10(mstarEll), np.log10(sfrEll), color ='k', alpha=0.5, marker="^", label="NIHAO LARGE w/ BH")
 
 fit_vals = np.asarray([6.0, 13])
 #fit = SFR0*((fit_vals/10**10)**slope)
