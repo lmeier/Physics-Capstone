@@ -162,7 +162,7 @@ def plot_hist(deltas, concs, pointToRemove=[-1], minConc = 8, maxConc =11, binCo
     plt.xlim(-3, 3)
     plt.yscale('log')
     plt.title(plotTitle)
-    plt.tight_layout()
+    #plt.tight_layout()
     plt.savefig(str("plots/10_hist_" + plotTitle.replace(" ", "") + ".png"), dpi=300)
     plt.show()
 
@@ -302,21 +302,21 @@ nihaoWithEll = galDict.copy()
 nihaoWithEll.update(galDictEllBH)
 avgFitDict = make_fits(nihaoWithEll)
 delta_list, conc_list = make_delta_conc_lists(nihaoWithEll.keys(), nihaoWithEll, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, pointToRemove = [0, 1, 2], minConc = 6, maxConc = 12, plotTitle="NIHAO with Ellipticals")
+plot_hist(delta_list, conc_list, pointToRemove = [0, 1, 2], minConc = 6, maxConc = 12, plotTitle="NIHAO + NIHAO with BH")
 
 #With AGN
 withAgn = galDictBH.copy()
 withAgn.update(galDictEllBH)
 avgFitDict = make_fits(withAgn)
 delta_list, conc_list = make_delta_conc_lists(withAgn.keys(), withAgn, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, pointToRemove=[0,1,2,3,22], minConc=5, maxConc=9.6,  plotTitle="Galaxies with AGN")
+plot_hist(delta_list, conc_list, pointToRemove=[0,1,2,3,22], minConc=5, maxConc=9.6,  plotTitle="Galaxies with BH")
 
 #Without AGN
 withoutAgn = galDict.copy()
 withAgn.update(galDictEll)
 avgFitDict = make_fits(withoutAgn)
 delta_list, conc_list = make_delta_conc_lists(withoutAgn.keys(), withoutAgn, allConc, avgFitDict)
-plot_hist(delta_list, conc_list, minConc = 5, maxConc = 15, plotTitle="Galaxies without AGN")
+plot_hist(delta_list, conc_list, minConc = 5, maxConc = 15, plotTitle="Galaxies without BH")
 
 print(galsNotIncluded)
 
