@@ -173,7 +173,7 @@ g1 = ['g8.26e11', 'g5.38e11']
 g2 = ['g8.26e11', 'g3.21e11']
 g3 = ['g8.26e11', 'g4.90e11']
 g4 = ['g8.26e11', 'g5.55e11']
-g5 = ['g8.26e11']
+g5 = ['g5.38e11']
 #gal_all = ['g1.95e10', 'g4.86e10', 'g6.77e10', 'g9.59e10', 'g1.05e11', 'g1.37e11', 'g1.52e11',
 # 'g2.04e11', 'g3.06e11', 'g3.21e11', 'g4.90e11', 'g5.38e11', 'g5.55e11', 'g6.96e11',  'g7.55e11',
 # 'g8.26e11', 'g8.28e11', 'g1.05e11', 'g1.12e12', 'g2.79e12']
@@ -286,7 +286,7 @@ for i, name, p in zip(gal_arr, size_names, plot):
     plt.xlabel("Time [gyr]", fontsize=18)
     plt.title( "NIHAO Galaxies")
     plt.legend(prop={'size': 8}, loc='best')
-    plt.savefig(str(fileBaseFalcon + "/capstoneFinal/plots/4_deltasfrg1.12e12"  + ".png"), dpi=300)
+    plt.savefig(str(fileBaseFalcon + "/capstoneFinal/plots/4_deltasfr" + g5[0]  + ".png"), dpi=300)
     plt.show()
 
 all_delta_percentages = list(all_delta_after_log)
