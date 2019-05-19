@@ -34,13 +34,28 @@ mpl.rcParams['axes.unicode_minus']=False
 #sfrArray, mStarArray = pickle.load(open("pickles/sfrAndMstarArray.pkl", "rb"))
 galDict = pickle.load(open("pickles/ALLjanNEW_NIHAOproperties.pkl", "rb"))
 galDictEll = pickle.load(open("pickles/jsonAGN_ELL_NIHAOproperties.pkl", "rb"))
+galDictBH = pickle.load(open("pickles/jsonNIHAO_BHproperties.pkl", "rb"))
 sfr = []
 mstar = []
 sfrEll = []
 mstarEll = []
 
+
+BHsuccessful = []
+
 print(len(galDict.keys()))
+for g in galDictBH.keys():
+    try:
+        propDict = galDictBH[g]
+        z = propDict['z']
+        sfrEll.append(propDict['sfr'][-1])
+        mstarEll.append(propDict['ms'][-1])
+        BHsuccessful.append(g)
+    except:
+        continue
 for g in galDict.keys():
+    if g in BHsuccessful:
+        continue
     propDict = galDict[g]
     z = propDict['z']
     sfr.append(propDict['sfr'][-1])
@@ -106,7 +121,7 @@ plt.plot(x,y, '-', color='k', linewidth=2, alpha = 0.5)
 
 #plt.scatter(mStarArray, sfrArray, color='b', alpha=0.5)
 plt.scatter(logmstar, logsfr, color='r', alpha=0.5, label="NIHAO")
-plt.scatter(np.log10(mstarEll), np.log10(sfrEll), color ='k', alpha=0.5, marker="^", label="NIHAO LARGE w/ BH")
+plt.scatter(np.log10(mstarEll), np.log10(sfrEll), color ='k', alpha=0.5, marker="^", label="NIHAO with BH")
 
 fit_vals = np.asarray([6.0, 13])
 #fit = SFR0*((fit_vals/10**10)**slope)
